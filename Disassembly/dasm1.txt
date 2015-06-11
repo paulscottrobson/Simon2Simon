@@ -1,0 +1,1024 @@
+$000: $1e : ldp   $7
+$001: $ea : call  L_02a
+$003: $4c : tcy   $3
+$007: $0d : setr
+$00f: $1b : ldp   $d
+$01f: $80 : br    L_000
+$03f: $41 : tcy   $8
+$03e: $21 : tma
+$03d: $70 : alec  $0
+$03b: $80 : br    L_000
+$037: $17 : ldp   $e
+$02f: $c2 : call  L_002
+$01e: $41 : tcy   $8
+$03c: $21 : tma
+$039: $7c : alec  $3
+$033: $80 : br    L_000
+$027: $72 : alec  $4
+$00e: $ac : br    L_02c
+$01d: $7a : alec  $5
+$03a: $92 : br    L_012
+$035: $76 : alec  $6
+$02b: $88 : br    L_008
+$016: $80 : br    L_000
+$02c: $4c : tcy   $3
+$018: $0c : rstr
+$030: $40 : tcy   $0
+$021: $0d : setr
+$002: $08 : tka
+$005: $0c : rstr
+$00b: $45 : tcy   $a
+$017: $78 : alec  $1
+$02e: $8d : br    L_00d
+$01c: $7c : alec  $3
+$038: $b6 : br    L_036
+$031: $7e : alec  $7
+$023: $9a : br    L_01a
+$006: $a9 : br    L_029
+$00d: $68 : tcmiy $1
+$01b: $a2 : br    L_022
+$036: $64 : tcmiy $2
+$02d: $a2 : br    L_022
+$01a: $6a : tcmiy $5
+$034: $a2 : br    L_022
+$029: $8d : br    L_00d
+$012: $1f : ldp   $f
+$024: $ba : br    L_03a
+$008: $1f : ldp   $f
+$011: $96 : br    L_016
+$022: $40 : tcy   $0
+$004: $60 : tcmiy $0
+$009: $60 : tcmiy $0
+$013: $42 : tcy   $4
+$026: $60 : tcmiy $0
+$00c: $60 : tcmiy $0
+$019: $49 : tcy   $9
+$032: $30 : sbit  $0
+$025: $36 : rbit  $1
+$00a: $16 : ldp   $6
+$015: $80 : br    L_000
+$02a: $11 : ldp   $8
+$014: $c0 : call  L_000
+$028: $10 : ldp   $0
+$010: $92 : br    L_012
+$020: $00 : comx
+$040: $1f : ldp   $f
+$041: $c6 : call  L_046
+$043: $1e : ldp   $7
+$047: $ea : call  L_06a
+$04f: $1f : ldp   $f
+$05f: $e4 : call  L_064
+$07f: $49 : tcy   $9
+$07e: $39 : tbit1 $2
+$07d: $94 : br    L_054
+$07b: $1b : ldp   $d
+$077: $80 : br    L_040
+$06f: $41 : tcy   $8
+$05e: $21 : tma
+$07c: $70 : alec  $0
+$079: $83 : br    L_043
+$073: $17 : ldp   $e
+$067: $c2 : call  L_042
+$04e: $41 : tcy   $8
+$05d: $21 : tma
+$07a: $72 : alec  $4
+$075: $96 : br    L_056
+$06b: $83 : br    L_043
+$056: $7c : alec  $3
+$06c: $a1 : br    L_061
+$058: $10 : ldp   $0
+$070: $ac : br    L_06c
+$061: $49 : tcy   $9
+$042: $38 : tbit1 $0
+$045: $ae : br    L_06e
+$04b: $14 : ldp   $2
+$057: $9c : br    L_05c
+$06e: $45 : tcy   $a
+$05c: $21 : tma
+$078: $74 : alec  $2
+$071: $89 : br    L_049
+$063: $7c : alec  $3
+$046: $ad : br    L_06d
+$04d: $72 : alec  $4
+$05b: $a4 : br    L_064
+$076: $89 : br    L_049
+$06d: $4f : tcy   $f
+$05a: $16 : ldp   $6
+$074: $c9 : call  L_049
+$069: $70 : alec  $0
+$052: $83 : br    L_043
+$064: $47 : tcy   $e
+$048: $16 : ldp   $6
+$051: $c9 : call  L_049
+$062: $70 : alec  $0
+$044: $83 : br    L_043
+$049: $15 : ldp   $a
+$053: $c0 : call  L_040
+$066: $41 : tcy   $8
+$04c: $21 : tma
+$059: $3d : ldx   $2
+$072: $40 : tcy   $0
+$065: $27 : saman
+$04a: $3f : ldx   $3
+$055: $14 : ldp   $2
+$06a: $80 : br    L_040
+$054: $12 : ldp   $4
+$068: $80 : br    L_040
+$050: $00 : comx
+$060: $00 : comx
+$080: $70 : alec  $0
+$081: $8f : br    L_08f
+$083: $12 : ldp   $4
+$087: $80 : br    L_080
+$08f: $1e : ldp   $7
+$09f: $b1 : br    L_0b1
+$0bf: $40 : tcy   $0
+$0be: $21 : tma
+$0bd: $42 : tcy   $4
+$0bb: $27 : saman
+$0b7: $70 : alec  $0
+$0af: $b9 : br    L_0b9
+$09e: $18 : ldp   $1
+$0bc: $80 : br    L_080
+$0b9: $48 : tcy   $1
+$0b3: $21 : tma
+$0a7: $4a : tcy   $5
+$08e: $27 : saman
+$09d: $70 : alec  $0
+$0ba: $96 : br    L_096
+$0b5: $18 : ldp   $1
+$0ab: $80 : br    L_080
+$096: $45 : tcy   $a
+$0ac: $21 : tma
+$098: $78 : alec  $1
+$0b0: $85 : br    L_085
+$0a1: $1c : ldp   $3
+$082: $80 : br    L_080
+$085: $49 : tcy   $9
+$08b: $34 : rbit  $0
+$097: $18 : ldp   $1
+$0ae: $80 : br    L_080
+$09c: $3d : ldx   $2
+$0b8: $40 : tcy   $0
+$0b1: $03 : tam
+$0a3: $11 : ldp   $8
+$086: $c0 : call  L_080
+$08d: $1e : ldp   $7
+$09b: $b1 : br    L_0b1
+$0b6: $42 : tcy   $4
+$0ad: $60 : tcmiy $0
+$09a: $60 : tcmiy $0
+$0b4: $49 : tcy   $9
+$0a9: $68 : tcmiy $1
+$092: $18 : ldp   $1
+$0a4: $80 : br    L_080
+$088: $49 : tcy   $9
+$091: $32 : sbit  $1
+$0a2: $3d : ldx   $2
+$084: $40 : tcy   $0
+$089: $62 : tcmiy $4
+$093: $6f : tcmiy $f
+$0a6: $1d : ldp   $b
+$08c: $c0 : call  L_080
+$099: $13 : ldp   $c
+$0b2: $c0 : call  L_080
+$0a5: $1e : ldp   $7
+$08a: $c0 : call  L_080
+$095: $1f : ldp   $f
+$0aa: $8b : br    L_08b
+$094: $45 : tcy   $a
+$0a8: $60 : tcmiy $0
+$090: $11 : ldp   $8
+$0a0: $95 : br    L_095
+$0c0: $1f : ldp   $f
+$0c1: $c6 : call  L_0c6
+$0c3: $1f : ldp   $f
+$0c7: $e4 : call  L_0e4
+$0cf: $11 : ldp   $8
+$0df: $cc : call  L_0cc
+$0ff: $49 : tcy   $9
+$0fe: $39 : tbit1 $2
+$0fd: $b7 : br    L_0f7
+$0fb: $83 : br    L_0c3
+$0f7: $45 : tcy   $a
+$0ef: $21 : tma
+$0de: $74 : alec  $2
+$0fc: $ab : br    L_0eb
+$0f9: $49 : tcy   $9
+$0f3: $3a : tbit1 $1
+$0e7: $ba : br    L_0fa
+$0ce: $10 : ldp   $0
+$0dd: $93 : br    L_0d3
+$0fa: $10 : ldp   $0
+$0f5: $a2 : br    L_0e2
+$0eb: $49 : tcy   $9
+$0d6: $0d : setr
+$0ec: $08 : tka
+$0d8: $0c : rstr
+$0f0: $78 : alec  $1
+$0e1: $8e : br    L_0ce
+$0c2: $7c : alec  $3
+$0c5: $9c : br    L_0dc
+$0cb: $7e : alec  $7
+$0d7: $b1 : br    L_0f1
+$0ee: $86 : br    L_0c6
+$0dc: $42 : tcy   $4
+$0f8: $8d : br    L_0cd
+$0f1: $4e : tcy   $7
+$0e3: $8d : br    L_0cd
+$0c6: $45 : tcy   $a
+$0cd: $23 : tya
+$0db: $48 : tcy   $1
+$0f6: $27 : saman
+$0ed: $70 : alec  $0
+$0da: $a9 : br    L_0e9
+$0f4: $8e : br    L_0ce
+$0e9: $14 : ldp   $2
+$0d2: $94 : br    L_0d4
+$0e4: $45 : tcy   $a
+$0c8: $21 : tma
+$0d1: $70 : alec  $0
+$0e2: $99 : br    L_0d9
+$0c4: $40 : tcy   $0
+$0c9: $39 : tbit1 $2
+$0d3: $a5 : br    L_0e5
+$0e6: $18 : ldp   $1
+$0cc: $af : br    L_0ef
+$0d9: $10 : ldp   $0
+$0f2: $bf : br    L_0ff
+$0e5: $35 : rbit  $2
+$0ca: $1e : ldp   $7
+$0d5: $91 : br    L_0d1
+$0ea: $2c : dyn
+$0d4: $00 : comx
+$0e8: $00 : comx
+$0d0: $00 : comx
+$0e0: $00 : comx
+$100: $45 : tcy   $a
+$101: $2a : dman
+$103: $03 : tam
+$107: $49 : tcy   $9
+$10f: $39 : tbit1 $2
+$11f: $bb : br    L_13b
+$13f: $41 : tcy   $8
+$13e: $21 : tma
+$13d: $9d : br    L_11d
+$13b: $38 : tbit1 $0
+$137: $9e : br    L_11e
+$12f: $ac : br    L_12c
+$11e: $15 : ldp   $a
+$13c: $c0 : call  L_100
+$139: $3d : ldx   $2
+$133: $40 : tcy   $0
+$127: $21 : tma
+$10e: $3f : ldx   $3
+$11d: $47 : tcy   $e
+$13a: $03 : tam
+$135: $11 : ldp   $8
+$12b: $cc : call  L_10c
+$116: $0d : setr
+$12c: $14 : ldp   $2
+$118: $88 : br    L_108
+$130: $47 : tcy   $e
+$121: $21 : tma
+$102: $11 : ldp   $8
+$105: $cc : call  L_10c
+$10b: $0c : rstr
+$117: $47 : tcy   $e
+$12e: $21 : tma
+$11c: $45 : tcy   $a
+$138: $22 : tmy
+$131: $3d : ldx   $2
+$123: $52 : ynec  $4
+$106: $b6 : br    L_136
+$10d: $47 : tcy   $e
+$11b: $b4 : br    L_134
+$136: $5c : ynec  $3
+$12d: $88 : br    L_108
+$11a: $4f : tcy   $f
+$134: $03 : tam
+$129: $3f : ldx   $3
+$112: $1c : ldp   $3
+$124: $80 : br    L_100
+$108: $54 : ynec  $2
+$111: $8a : br    L_10a
+$122: $4b : tcy   $d
+$104: $03 : tam
+$109: $3f : ldx   $3
+$113: $45 : tcy   $a
+$126: $60 : tcmiy $0
+$10c: $43 : tcy   $c
+$119: $60 : tcmiy $0
+$132: $16 : ldp   $6
+$125: $80 : br    L_100
+$10a: $3f : ldx   $3
+$115: $45 : tcy   $a
+$12a: $60 : tcmiy $0
+$114: $10 : ldp   $0
+$128: $80 : br    L_100
+$110: $0a : tdo
+$120: $00 : comx
+$140: $3f : ldx   $3
+$141: $45 : tcy   $a
+$143: $21 : tma
+$147: $78 : alec  $1
+$14f: $b1 : br    L_171
+$15f: $74 : alec  $2
+$17f: $bb : br    L_17b
+$17e: $72 : alec  $4
+$17d: $b9 : br    L_179
+$17b: $48 : tcy   $1
+$177: $21 : tma
+$16f: $4d : tcy   $b
+$15e: $03 : tam
+$17c: $b5 : br    L_175
+$179: $48 : tcy   $1
+$173: $21 : tma
+$167: $4d : tcy   $b
+$14e: $29 : alem
+$15d: $b5 : br    L_175
+$17a: $03 : tam
+$175: $21 : tma
+$16b: $3d : ldx   $2
+$156: $48 : tcy   $1
+$16c: $70 : alec  $0
+$158: $9c : br    L_15c
+$170: $74 : alec  $2
+$161: $b1 : br    L_171
+$142: $72 : alec  $4
+$145: $9b : br    L_15b
+$14b: $76 : alec  $6
+$157: $ad : br    L_16d
+$16e: $b4 : br    L_174
+$15c: $6e : tcmiy $7
+$178: $a9 : br    L_169
+$171: $3d : ldx   $2
+$163: $48 : tcy   $1
+$146: $6a : tcmiy $5
+$14d: $a9 : br    L_169
+$15b: $62 : tcmiy $4
+$176: $a9 : br    L_169
+$16d: $6c : tcmiy $3
+$15a: $a9 : br    L_169
+$174: $64 : tcmiy $2
+$169: $0f : retn
+$152: $42 : tcy   $4
+$164: $61 : tcmiy $8
+$148: $42 : tcy   $4
+$151: $2a : dman
+$162: $89 : br    L_149
+$144: $a8 : br    L_168
+$149: $03 : tam
+$153: $3d : ldx   $2
+$166: $40 : tcy   $0
+$14c: $6a : tcmiy $5
+$159: $68 : tcmiy $1
+$172: $1d : ldp   $b
+$165: $c0 : call  L_140
+$14a: $13 : ldp   $c
+$155: $c0 : call  L_140
+$16a: $11 : ldp   $8
+$154: $b6 : br    L_176
+$168: $10 : ldp   $0
+$150: $80 : br    L_140
+$160: $02 : ynea
+$180: $41 : tcy   $8
+$181: $60 : tcmiy $0
+$183: $43 : tcy   $c
+$187: $21 : tma
+$18f: $47 : tcy   $e
+$19f: $03 : tam
+$1bf: $35 : rbit  $2
+$1be: $37 : rbit  $3
+$1bd: $45 : tcy   $a
+$1bb: $21 : tma
+$1b7: $70 : alec  $0
+$1af: $ba : br    L_1ba
+$19e: $74 : alec  $2
+$1bc: $ae : br    L_1ae
+$1b9: $7c : alec  $3
+$1b3: $ac : br    L_1ac
+$1a7: $72 : alec  $4
+$18e: $82 : br    L_182
+$19d: $ae : br    L_1ae
+$1ba: $4b : tcy   $d
+$1b5: $c9 : call  L_189
+$1ab: $70 : alec  $0
+$196: $a5 : br    L_1a5
+$1ac: $4f : tcy   $f
+$198: $c9 : call  L_189
+$1b0: $70 : alec  $0
+$1a1: $a5 : br    L_1a5
+$182: $47 : tcy   $e
+$185: $c9 : call  L_189
+$18b: $70 : alec  $0
+$197: $a5 : br    L_1a5
+$1ae: $47 : tcy   $e
+$19c: $2a : dman
+$1b8: $a3 : br    L_1a3
+$1b1: $b4 : br    L_1b4
+$1a3: $03 : tam
+$186: $41 : tcy   $8
+$18d: $28 : imac
+$19b: $03 : tam
+$1b6: $35 : rbit  $2
+$1ad: $37 : rbit  $3
+$19a: $bd : br    L_1bd
+$1b4: $45 : tcy   $a
+$1a9: $21 : tma
+$192: $70 : alec  $0
+$1a4: $a2 : br    L_1a2
+$188: $19 : ldp   $9
+$191: $a6 : br    L_1a6
+$1a2: $1a : ldp   $5
+$184: $92 : br    L_192
+$189: $3d : ldx   $2
+$193: $21 : tma
+$1a6: $3f : ldx   $3
+$18c: $41 : tcy   $8
+$199: $27 : saman
+$1b2: $0f : retn
+$1a5: $28 : imac
+$18a: $03 : tam
+$195: $35 : rbit  $2
+$1aa: $37 : rbit  $3
+$194: $bd : br    L_1bd
+$1a8: $00 : comx
+$190: $00 : comx
+$1a0: $00 : comx
+$1c0: $48 : tcy   $1
+$1c1: $21 : tma
+$1c3: $4c : tcy   $3
+$1c7: $27 : saman
+$1cf: $70 : alec  $0
+$1df: $af : br    L_1ef
+$1ff: $21 : tma
+$1fe: $48 : tcy   $1
+$1fd: $29 : alem
+$1fb: $a7 : br    L_1e7
+$1f7: $9c : br    L_1dc
+$1ef: $40 : tcy   $0
+$1de: $21 : tma
+$1fc: $44 : tcy   $2
+$1f9: $29 : alem
+$1f3: $9c : br    L_1dc
+$1e7: $40 : tcy   $0
+$1ce: $21 : tma
+$1dd: $44 : tcy   $2
+$1fa: $03 : tam
+$1f5: $48 : tcy   $1
+$1eb: $21 : tma
+$1d6: $4c : tcy   $3
+$1ec: $03 : tam
+$1d8: $40 : tcy   $0
+$1f0: $3c : ldx   $0
+$1e1: $21 : tma
+$1c2: $3e : ldx   $1
+$1c5: $03 : tam
+$1cb: $2b : iyc
+$1d7: $9c : br    L_1dc
+$1ee: $b0 : br    L_1f0
+$1dc: $3f : ldx   $3
+$1f8: $0f : retn
+$1f1: $48 : tcy   $1
+$1e3: $3d : ldx   $2
+$1c6: $68 : tcmiy $1
+$1cd: $1d : ldp   $b
+$1db: $c0 : call  L_1c0
+$1f6: $13 : ldp   $c
+$1ed: $c0 : call  L_1c0
+$1da: $1f : ldp   $f
+$1f4: $f7 : call  L_1f7
+$1e9: $40 : tcy   $0
+$1d2: $31 : sbit  $2
+$1e4: $1b : ldp   $d
+$1c8: $80 : br    L_1c0
+$1d1: $4b : tcy   $d
+$1e2: $21 : tma
+$1c4: $70 : alec  $0
+$1c9: $a6 : br    L_1e6
+$1d3: $b1 : br    L_1f1
+$1e6: $49 : tcy   $9
+$1cc: $38 : tbit1 $0
+$1d9: $8a : br    L_1ca
+$1f2: $14 : ldp   $2
+$1e5: $b6 : br    L_1f6
+$1ca: $14 : ldp   $2
+$1d5: $bf : br    L_1ff
+$1ea: $43 : tcy   $c
+$1d4: $28 : imac
+$1e8: $03 : tam
+$1d0: $0f : retn
+$1e0: $00 : comx
+$200: $3f : ldx   $3
+$201: $40 : tcy   $0
+$203: $38 : tbit1 $0
+$207: $a1 : br    L_221
+$20f: $41 : tcy   $8
+$21f: $21 : tma
+$23f: $40 : tcy   $0
+$23e: $68 : tcmiy $1
+$23d: $22 : tmy
+$23b: $3c : ldx   $0
+$237: $70 : alec  $0
+$22f: $8e : br    L_20e
+$21e: $78 : alec  $1
+$23c: $ba : br    L_23a
+$239: $74 : alec  $2
+$233: $ab : br    L_22b
+$227: $ac : br    L_22c
+$20e: $60 : tcmiy $0
+$21d: $98 : br    L_218
+$23a: $62 : tcmiy $4
+$235: $98 : br    L_218
+$22b: $61 : tcmiy $8
+$216: $98 : br    L_218
+$22c: $63 : tcmiy $c
+$218: $3f : ldx   $3
+$230: $9b : br    L_21b
+$221: $41 : tcy   $8
+$202: $21 : tma
+$205: $40 : tcy   $0
+$20b: $60 : tcmiy $0
+$217: $22 : tmy
+$22e: $3c : ldx   $0
+$21c: $25 : amaac
+$238: $03 : tam
+$231: $3f : ldx   $3
+$223: $48 : tcy   $1
+$206: $28 : imac
+$20d: $03 : tam
+$21b: $0f : retn
+$236: $41 : tcy   $8
+$22d: $21 : tma
+$21a: $3d : ldx   $2
+$234: $40 : tcy   $0
+$229: $20 : tamiy
+$212: $68 : tcmiy $1
+$224: $1d : ldp   $b
+$208: $c0 : call  L_200
+$211: $13 : ldp   $c
+$222: $c0 : call  L_200
+$204: $1f : ldp   $f
+$209: $f7 : call  L_237
+$213: $1a : ldp   $5
+$226: $88 : br    L_208
+$20c: $06 : a8aac
+$219: $07 : dan
+$232: $07 : dan
+$225: $24 : tay
+$20a: $0f : retn
+$215: $1e : ldp   $7
+$22a: $c0 : call  L_200
+$214: $3d : ldx   $2
+$228: $15 : ldp   $a
+$210: $95 : br    L_215
+$220: $00 : comx
+$240: $42 : tcy   $4
+$241: $21 : tma
+$243: $41 : tcy   $8
+$247: $22 : tmy
+$24f: $27 : saman
+$25f: $70 : alec  $0
+$27f: $bd : br    L_27d
+$27e: $b9 : br    L_279
+$27d: $2b : iyc
+$27b: $21 : tma
+$277: $4a : tcy   $5
+$26f: $27 : saman
+$25e: $70 : alec  $0
+$27c: $9a : br    L_25a
+$279: $3d : ldx   $2
+$273: $40 : tcy   $0
+$267: $6a : tcmiy $5
+$24e: $1a : ldp   $5
+$25d: $c0 : call  L_240
+$27a: $1d : ldp   $b
+$275: $c0 : call  L_240
+$26b: $13 : ldp   $c
+$256: $c0 : call  L_240
+$26c: $41 : tcy   $8
+$258: $21 : tma
+$270: $70 : alec  $0
+$261: $97 : br    L_257
+$242: $15 : ldp   $a
+$245: $e3 : call  L_263
+$24b: $9c : br    L_25c
+$257: $15 : ldp   $a
+$26e: $c0 : call  L_240
+$25c: $1a : ldp   $5
+$278: $c0 : call  L_240
+$271: $1d : ldp   $b
+$263: $c0 : call  L_240
+$246: $13 : ldp   $c
+$24d: $c0 : call  L_240
+$25b: $1f : ldp   $f
+$276: $f7 : call  L_277
+$26d: $80 : br    L_240
+$25a: $42 : tcy   $4
+$274: $60 : tcmiy $0
+$269: $60 : tcmiy $0
+$252: $45 : tcy   $a
+$264: $21 : tma
+$248: $70 : alec  $0
+$251: $89 : br    L_249
+$262: $18 : ldp   $1
+$244: $80 : br    L_240
+$249: $10 : ldp   $0
+$253: $80 : br    L_240
+$266: $40 : tcy   $0
+$24c: $0d : setr
+$259: $08 : tka
+$272: $0c : rstr
+$265: $7e : alec  $7
+$24a: $94 : br    L_254
+$255: $41 : tcy   $8
+$26a: $60 : tcmiy $0
+$254: $10 : ldp   $0
+$268: $aa : br    L_26a
+$250: $04 : tamza
+$260: $0e : ia
+$280: $42 : tcy   $4
+$281: $38 : tbit1 $0
+$283: $a7 : br    L_2a7
+$287: $68 : tcmiy $1
+$28f: $22 : tmy
+$29f: $3c : ldx   $0
+$2bf: $21 : tma
+$2be: $40 : tcy   $0
+$2bd: $3d : ldx   $2
+$2bb: $7c : alec  $3
+$2b7: $84 : br    L_284
+$2af: $7e : alec  $7
+$29e: $93 : br    L_293
+$2bc: $7d : alec  $b
+$2b9: $8c : br    L_28c
+$2b3: $b2 : br    L_2b2
+$2a7: $60 : tcmiy $0
+$28e: $28 : imac
+$29d: $03 : tam
+$2ba: $2a : dman
+$2b5: $24 : tay
+$2ab: $3c : ldx   $0
+$296: $21 : tma
+$2ac: $35 : rbit  $2
+$298: $37 : rbit  $3
+$2b0: $2e : xma
+$2a1: $40 : tcy   $0
+$282: $3d : ldx   $2
+$285: $70 : alec  $0
+$28b: $84 : br    L_284
+$297: $78 : alec  $1
+$2ae: $93 : br    L_293
+$29c: $74 : alec  $2
+$2b8: $8c : br    L_28c
+$2b1: $b2 : br    L_2b2
+$2a3: $42 : tcy   $4
+$286: $38 : tbit1 $0
+$28d: $b4 : br    L_2b4
+$29b: $68 : tcmiy $1
+$2b6: $22 : tmy
+$2ad: $3e : ldx   $1
+$29a: $bf : br    L_2bf
+$2b4: $60 : tcmiy $0
+$2a9: $28 : imac
+$292: $03 : tam
+$2a4: $2a : dman
+$288: $24 : tay
+$291: $3e : ldx   $1
+$2a2: $96 : br    L_296
+$284: $60 : tcmiy $0
+$289: $a5 : br    L_2a5
+$293: $68 : tcmiy $1
+$2a6: $a5 : br    L_2a5
+$28c: $64 : tcmiy $2
+$299: $a5 : br    L_2a5
+$2b2: $6c : tcmiy $3
+$2a5: $3f : ldx   $3
+$28a: $0f : retn
+$295: $40 : tcy   $0
+$2aa: $21 : tma
+$294: $3f : ldx   $3
+$2a8: $41 : tcy   $8
+$290: $13 : ldp   $c
+$2a0: $a8 : br    L_2a8
+$2c0: $3d : ldx   $2
+$2c1: $40 : tcy   $0
+$2c3: $21 : tma
+$2c7: $44 : tcy   $2
+$2cf: $70 : alec  $0
+$2df: $b3 : br    L_2f3
+$2ff: $78 : alec  $1
+$2fe: $ac : br    L_2ec
+$2fd: $74 : alec  $2
+$2fb: $ae : br    L_2ee
+$2f7: $7c : alec  $3
+$2ef: $b6 : br    L_2f6
+$2de: $72 : alec  $4
+$2fc: $91 : br    L_2d1
+$2f9: $99 : br    L_2d9
+$2f3: $68 : tcmiy $1
+$2e7: $68 : tcmiy $1
+$2ce: $0d : setr
+$2dd: $64 : tcmiy $2
+$2fa: $68 : tcmiy $1
+$2f5: $64 : tcmiy $2
+$2eb: $68 : tcmiy $1
+$2d6: $94 : br    L_2d4
+$2ec: $6e : tcmiy $7
+$2d8: $68 : tcmiy $1
+$2f0: $6b : tcmiy $d
+$2e1: $0d : setr
+$2c2: $60 : tcmiy $0
+$2c5: $6b : tcmiy $d
+$2cb: $60 : tcmiy $0
+$2d7: $94 : br    L_2d4
+$2ee: $67 : tcmiy $e
+$2dc: $68 : tcmiy $1
+$2f8: $65 : tcmiy $a
+$2f1: $60 : tcmiy $0
+$2e3: $0d : setr
+$2c6: $65 : tcmiy $a
+$2cd: $60 : tcmiy $0
+$2db: $94 : br    L_2d4
+$2f6: $6a : tcmiy $5
+$2ed: $64 : tcmiy $2
+$2da: $61 : tcmiy $8
+$2f4: $60 : tcmiy $0
+$2e9: $61 : tcmiy $8
+$2d2: $0d : setr
+$2e4: $60 : tcmiy $0
+$2c8: $94 : br    L_2d4
+$2d1: $65 : tcmiy $a
+$2e2: $60 : tcmiy $0
+$2c4: $67 : tcmiy $e
+$2c9: $68 : tcmiy $1
+$2d3: $65 : tcmiy $a
+$2e6: $6a : tcmiy $5
+$2cc: $94 : br    L_2d4
+$2d9: $64 : tcmiy $2
+$2f2: $60 : tcmiy $0
+$2e5: $60 : tcmiy $0
+$2ca: $60 : tcmiy $0
+$2d5: $63 : tcmiy $c
+$2ea: $6c : tcmiy $3
+$2d4: $3f : ldx   $3
+$2e8: $0f : retn
+$2d0: $01 : a8aac
+$2e0: $05 : a10aac
+$300: $3d : ldx   $2
+$301: $48 : tcy   $1
+$303: $2a : dman
+$307: $9f : br    L_31f
+$30f: $aa : br    L_32a
+$31f: $20 : tamiy
+$33f: $21 : tma
+$33e: $41 : tcy   $8
+$33d: $03 : tam
+$33b: $4c : tcy   $3
+$337: $21 : tma
+$32f: $49 : tcy   $9
+$31e: $03 : tam
+$33c: $41 : tcy   $8
+$339: $2a : dman
+$333: $b5 : br    L_335
+$327: $20 : tamiy
+$30e: $2a : dman
+$31d: $b5 : br    L_335
+$33a: $80 : br    L_300
+$335: $03 : tam
+$32b: $42 : tcy   $4
+$316: $21 : tma
+$32c: $45 : tcy   $a
+$318: $03 : tam
+$330: $4a : tcy   $5
+$321: $21 : tma
+$302: $4d : tcy   $b
+$305: $03 : tam
+$30b: $45 : tcy   $a
+$317: $2a : dman
+$32e: $86 : br    L_306
+$31c: $20 : tamiy
+$338: $2a : dman
+$331: $86 : br    L_306
+$323: $ad : br    L_32d
+$306: $03 : tam
+$30d: $41 : tcy   $8
+$31b: $0d : setr
+$336: $8b : br    L_30b
+$32d: $46 : tcy   $6
+$31a: $21 : tma
+$334: $43 : tcy   $c
+$329: $03 : tam
+$312: $4e : tcy   $7
+$324: $21 : tma
+$308: $4b : tcy   $d
+$311: $03 : tam
+$322: $43 : tcy   $c
+$304: $2a : dman
+$309: $b2 : br    L_332
+$313: $20 : tamiy
+$326: $2a : dman
+$30c: $b2 : br    L_332
+$319: $bc : br    L_33c
+$332: $03 : tam
+$325: $41 : tcy   $8
+$30a: $0c : rstr
+$315: $a2 : br    L_322
+$32a: $3f : ldx   $3
+$314: $0f : retn
+$328: $03 : tam
+$310: $1a : ldp   $5
+$320: $92 : br    L_312
+$340: $41 : tcy   $8
+$341: $60 : tcmiy $0
+$343: $47 : tcy   $e
+$347: $68 : tcmiy $1
+$34f: $47 : tcy   $e
+$35f: $22 : tmy
+$37f: $0d : setr
+$37e: $08 : tka
+$37d: $0c : rstr
+$37b: $70 : alec  $0
+$377: $88 : br    L_348
+$36f: $40 : tcy   $0
+$35e: $32 : sbit  $1
+$37c: $46 : tcy   $6
+$379: $03 : tam
+$373: $4f : tcy   $f
+$367: $21 : tma
+$34e: $47 : tcy   $e
+$35d: $27 : saman
+$37a: $70 : alec  $0
+$375: $82 : br    L_342
+$36b: $21 : tma
+$356: $4f : tcy   $f
+$36c: $03 : tam
+$358: $4b : tcy   $d
+$370: $60 : tcmiy $0
+$361: $88 : br    L_348
+$342: $4b : tcy   $d
+$345: $26 : mnez
+$34b: $b1 : br    L_371
+$357: $46 : tcy   $6
+$36e: $21 : tma
+$35c: $4e : tcy   $7
+$378: $03 : tam
+$371: $17 : ldp   $e
+$363: $80 : br    L_340
+$346: $4b : tcy   $d
+$34d: $28 : imac
+$35b: $88 : br    L_348
+$376: $03 : tam
+$36d: $28 : imac
+$35a: $a9 : br    L_369
+$374: $88 : br    L_348
+$369: $41 : tcy   $8
+$352: $68 : tcmiy $1
+$364: $93 : br    L_353
+$348: $47 : tcy   $e
+$351: $28 : imac
+$362: $03 : tam
+$344: $74 : alec  $2
+$349: $8f : br    L_34f
+$353: $40 : tcy   $0
+$366: $3a : tbit1 $1
+$34c: $a5 : br    L_365
+$359: $4b : tcy   $d
+$372: $60 : tcmiy $0
+$365: $40 : tcy   $0
+$34a: $36 : rbit  $1
+$355: $1c : ldp   $3
+$36a: $a4 : br    L_364
+$354: $00 : comx
+$368: $00 : comx
+$350: $00 : comx
+$360: $00 : comx
+$380: $4e : tcy   $7
+$381: $38 : tbit1 $0
+$383: $bd : br    L_3bd
+$387: $3a : tbit1 $1
+$38f: $9e : br    L_39e
+$39f: $39 : tbit1 $2
+$3bf: $a7 : br    L_3a7
+$3be: $b5 : br    L_3b5
+$3bd: $46 : tcy   $6
+$3bb: $38 : tbit1 $0
+$3b7: $b0 : br    L_3b0
+$3af: $ac : br    L_3ac
+$39e: $46 : tcy   $6
+$3bc: $3a : tbit1 $1
+$3b9: $b0 : br    L_3b0
+$3b3: $ac : br    L_3ac
+$3a7: $46 : tcy   $6
+$38e: $39 : tbit1 $2
+$39d: $b0 : br    L_3b0
+$3ba: $ac : br    L_3ac
+$3b5: $46 : tcy   $6
+$3ab: $3b : tbit1 $3
+$396: $b0 : br    L_3b0
+$3ac: $1b : ldp   $d
+$398: $88 : br    L_388
+$3b0: $1b : ldp   $d
+$3a1: $86 : br    L_386
+$382: $4f : tcy   $f
+$385: $21 : tma
+$38b: $4e : tcy   $7
+$397: $78 : alec  $1
+$3ae: $b8 : br    L_3b8
+$39c: $b4 : br    L_3b4
+$3b8: $21 : tma
+$3b1: $41 : tcy   $8
+$3a3: $78 : alec  $1
+$386: $84 : br    L_384
+$38d: $74 : alec  $2
+$39b: $93 : br    L_393
+$3b6: $72 : alec  $4
+$3ad: $8c : br    L_38c
+$39a: $b2 : br    L_3b2
+$3b4: $21 : tma
+$3a9: $41 : tcy   $8
+$392: $78 : alec  $1
+$3a4: $8a : br    L_38a
+$388: $74 : alec  $2
+$391: $aa : br    L_3aa
+$3a2: $a8 : br    L_3a8
+$384: $60 : tcmiy $0
+$389: $90 : br    L_390
+$393: $68 : tcmiy $1
+$3a6: $90 : br    L_390
+$38c: $64 : tcmiy $2
+$399: $90 : br    L_390
+$3b2: $6c : tcmiy $3
+$3a5: $90 : br    L_390
+$38a: $62 : tcmiy $4
+$395: $90 : br    L_390
+$3aa: $6a : tcmiy $5
+$394: $90 : br    L_390
+$3a8: $66 : tcmiy $6
+$390: $0f : retn
+$3a0: $2d : cpaiz
+$3c0: $0b : clo
+$3c1: $2f : cla
+$3c3: $3f : ldx   $3
+$3c7: $4f : tcy   $f
+$3cf: $0c : rstr
+$3df: $03 : tam
+$3ff: $2c : dyn
+$3fe: $8f : br    L_3cf
+$3fd: $10 : ldp   $0
+$3fb: $80 : br    L_3c0
+$3f7: $3d : ldx   $2
+$3ef: $42 : tcy   $4
+$3de: $23 : tya
+$3fc: $40 : tcy   $0
+$3f9: $25 : amaac
+$3f3: $24 : tay
+$3e7: $0c : rstr
+$3ce: $3f : ldx   $3
+$3dd: $0f : retn
+$3fa: $41 : tcy   $8
+$3f5: $60 : tcmiy $0
+$3eb: $98 : br    L_3d8
+$3d6: $41 : tcy   $8
+$3ec: $64 : tcmiy $2
+$3d8: $42 : tcy   $4
+$3f0: $60 : tcmiy $0
+$3e1: $60 : tcmiy $0
+$3c2: $19 : ldp   $9
+$3c5: $80 : br    L_3c0
+$3cb: $49 : tcy   $9
+$3d7: $38 : tbit1 $0
+$3ee: $b1 : br    L_3f1
+$3dc: $10 : ldp   $0
+$3f8: $80 : br    L_3c0
+$3f1: $12 : ldp   $4
+$3e3: $b0 : br    L_3f0
+$3c6: $49 : tcy   $9
+$3cd: $35 : rbit  $2
+$3db: $3d : ldx   $2
+$3f6: $41 : tcy   $8
+$3ed: $60 : tcmiy $0
+$3da: $60 : tcmiy $0
+$3f4: $65 : tcmiy $a
+$3e9: $3f : ldx   $3
+$3d2: $0f : retn
+$3e4: $3d : ldx   $2
+$3c8: $41 : tcy   $8
+$3d1: $2a : dman
+$3e2: $aa : br    L_3ea
+$3c4: $20 : tamiy
+$3c9: $2a : dman
+$3d3: $aa : br    L_3ea
+$3e6: $20 : tamiy
+$3cc: $2a : dman
+$3d9: $aa : br    L_3ea
+$3f2: $3f : ldx   $3
+$3e5: $49 : tcy   $9
+$3ca: $31 : sbit  $2
+$3d5: $94 : br    L_3d4
+$3ea: $03 : tam
+$3d4: $3f : ldx   $3
+$3e8: $0f : retn
+$3d0: $09 : knez
+$3e0: $00 : comx

@@ -10,19 +10,20 @@ mnemonics = [""] * 128
 #	Instructions with 4 bit operands.
 #
 for i in range(0,16):
-	mnemonics[0x40+i] = "tcy   ${0:x}".format(bitReverse[i])
-	mnemonics[0x50+i] = "ynec  ${0:x}".format(bitReverse[i])
-	mnemonics[0x60+i] = "tcmiy ${0:x}".format(bitReverse[i])
-	mnemonics[0x70+i] = "alec  ${0:x}".format(bitReverse[i])
+	mnemonics[0x10+i] = "ldp   {0}".format(bitReverse[i])
+	mnemonics[0x40+i] = "tcy   {0}".format(bitReverse[i])
+	mnemonics[0x50+i] = "ynec  {0}".format(bitReverse[i])
+	mnemonics[0x60+i] = "tcmiy {0}".format(bitReverse[i])
+	mnemonics[0x70+i] = "alec  {0}".format(bitReverse[i])
 #
 #	Instructions with 2 bit commands
 #
 for i in range(0,4):
 	param = i if i == 0 or i == 3 else 3 - i
-	mnemonics[0x30+i] = "sbit  ${0:x}".format(param)
-	mnemonics[0x34+i] = "rbit  ${0:x}".format(param)
-	mnemonics[0x38+i] = "tbit1 ${0:x}".format(param)
-	mnemonics[0x3C+i] = "ldx   ${0:x}".format(param)
+	mnemonics[0x30+i] = "sbit  {0}".format(param)
+	mnemonics[0x34+i] = "rbit  {0}".format(param)
+	mnemonics[0x38+i] = "tbit1 {0}".format(param)
+	mnemonics[0x3C+i] = "ldx   {0}".format(param)
 #
 #	Stand alone instructions.
 #
@@ -42,11 +43,49 @@ simon = []
 simonFile = open("simon.bin","rb")
 for i in range(0,1024):
 	simon.append(ord(simonFile.read(1)))
+#
+#	Disassembly.
+#
+disasm = []
+isLabel = [False] * 1024
+isLabel[0x3C0] = True
 
 for page in range(0,16):
-	pc = page * 64
-	for inst in range(0,64):
-		x = "{0:03x} {1:02x} {2}".format(pc,simon[pc],mnemonics[simon[pc]])
-		print(x)
-		pc = page * 64 + tmsNextPC[pc % 64]
-print(len(tmsNextPC))
+	pageAddress = page * 64
+	programCounter = 0
+	processCount = 64
+	while processCount > 0:
+		opcode = simon[pageAddress+programCounter]
+		line = [pageAddress + programCounter,"${0:03x}: ${1:02x}".format(pageAddress+programCounter,opcode),"" ] 
+
+		if opcode >= 0x10 and opcode < 0x20:
+			nextAddress = tmsNextPC[programCounter]
+			nextInstr = simon[pageAddress+nextAddress]
+			line[1] = "{0} ${1:02x}".format(line[1],nextInstr)
+			longPage = bitReverse[opcode % 16] * 64
+			line[2] = "x{0} L{1:03x}".format("br  " if nextInstr < 0xC0 else "call",longPage+nextInstr % 64)
+			isLabel[longPage+nextInstr%64] = True
+			disasm.append(line)
+			programCounter = tmsNextPC[programCounter]
+			programCounter = tmsNextPC[programCounter]
+			processCount = processCount - 2
+		elif opcode >= 0x80:
+			line[2] = "{0}  L{1:03x}".format("br  " if opcode < 0xC0 else "call",pageAddress+opcode % 64)
+			isLabel[pageAddress+opcode % 64] = True
+			disasm.append(line)
+			programCounter = tmsNextPC[programCounter]
+			processCount = processCount - 1
+		else:
+			line[2] = mnemonics[opcode]
+			disasm.append(line)
+			programCounter = tmsNextPC[programCounter]
+			processCount = processCount - 1
+
+for l in disasm:
+	if l[0] % 64 == 0:
+		print("; *******************************************************")
+		print(";                       Page {0}".format(int(l[0]/64)))
+		print("; *******************************************************")
+	if isLabel[l[0]]:
+		print(".L{0:03x}".format(l[0]))
+	print("\t{0:16} ; {1:16} // ".format(l[2],l[1]))
