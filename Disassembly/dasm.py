@@ -27,7 +27,7 @@ for i in range(0,4):
 #
 #	Stand alone instructions.
 #
-list1 = "comx,a8aac,ynea,tam,tamza,a10aac,a8aac,dan,tka,knez,tdo,clo,rstr,setr,ia,retn".split(",")
+list1 = "comx,a8aac,ynea,tam,tamza,a10aac,a6aac,dan,tka,knez,tdo,clo,rstr,setr,ia,retn".split(",")
 list2 = "tamiy,tma,tmy,tya,tay,amaac,mnez,saman,imac,alem,dman,iyc,dyn,cpaiz,xma,cla".split(",")
 for i in range(0,16):
 	mnemonics[0x00+i] = list1[i]
@@ -83,9 +83,8 @@ for page in range(0,16):
 
 for l in disasm:
 	if l[0] % 64 == 0:
-		print("; *******************************************************")
-		print(";                       Page {0}".format(int(l[0]/64)))
-		print("; *******************************************************")
+		print("\n; *******************************************************\n")
+		print("\tpage {0}".format(int(l[0]/64)))
 	if isLabel[l[0]]:
 		print(".L{0:03x}".format(l[0]))
 	print("\t{0:16} ; {1:16} // ".format(l[2],l[1]))
