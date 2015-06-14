@@ -33,7 +33,7 @@ objectCode = [ 0 ] * 1024											# object code
 labelRequired = [ None ] * 1024										# label patch here, if any.
 labelToAddress = {} 												# map label (lowercase) to address
 
-source = open("dasm2.txt").readlines()								# read in source code.
+source = open("revenge.txt").readlines()							# read in source code.
 source = [s[:s.find(";")] if s.find(";")>=0 else s for s in source]	# remove comments
 source = [s.strip().lower().replace("\t"," ") for s in source]		# preprocess
 source = [s for s in source if s != ""]								# remove blank lines
@@ -69,12 +69,14 @@ for line in source:													# work through all the source code.
 		programCounter = nextPC[programCounter]
 
 	else:
+		print(line)
 		assert(line in mnemonicsToOpcode)
 		objectCode[programCounter+pageAddress] = mnemonicsToOpcode[line]
 		programCounter = nextPC[programCounter]
 
 for address in range(0,1024):
 	if labelRequired[address] is not None:
+		print(labelRequired[address])
 		assert(labelRequired[address] in labelToAddress)
 		target = labelToAddress[labelRequired[address]]
 		if objectCode[address] >= 0x80:
@@ -89,3 +91,4 @@ for i in range(0,1024):
 	simon.append(ord(simonFile.read(1)))
 	assert(simon[i] == objectCode[i])
 
+print("** OK **")
