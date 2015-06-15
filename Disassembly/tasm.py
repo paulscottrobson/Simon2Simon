@@ -33,7 +33,7 @@ objectCode = [ 0 ] * 1024											# object code
 labelRequired = [ None ] * 1024										# label patch here, if any.
 labelToAddress = {} 												# map label (lowercase) to address
 
-source = open("revenge.txt").readlines()							# read in source code.
+source = open("revenge.asm").readlines()							# read in source code.
 source = [s[:s.find(";")] if s.find(";")>=0 else s for s in source]	# remove comments
 source = [s.strip().lower().replace("\t"," ") for s in source]		# preprocess
 source = [s for s in source if s != ""]								# remove blank lines
