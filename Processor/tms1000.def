@@ -1,0 +1,111 @@
+// ********************************************************************************************
+// ********************************************************************************************
+//
+//							Definition file for TMS 1000 MCU
+//
+//	$MEM 	RAM Memory access, normally ram[x*16+y]
+//	$2 		Bit reversed lower 2 bits
+//	$4 		Bit reversed lower 4 bits (ldp etc.)
+//	$6 		Lower 6 bits, not reversed.
+//
+// ********************************************************************************************
+// ********************************************************************************************
+
+// ********************************************************************************************
+//						Section 4.2 Register to Register Transfers
+// ********************************************************************************************
+
+24 		"tay"		y = a													// transfer A to Y
+23 		"tya"		a = y 													// transfer Y to A
+2F 		"cla"		a = 0													// clear accumulator
+
+// ********************************************************************************************
+//					  Section 4.3 Register to/from Memory Transfers
+// ********************************************************************************************
+
+03 		"tam"		$MEM = a 												// transfer A to Memory
+20 		"tamiy"		$MEM = a;a = (a + 1) & 0x0F 							// transfer A to Memory, Inc Y
+04 		"tamza"		$MEM = a;a = 0 											// transfer A to Memory, Clear A
+22		"tmy"		y = $MEM 												// transfer Memory to Y
+21		"tma"		a = $MEM 												// transfer Memory to A
+2E 		"xma"		temp8 = a;a = $MEM;$MEM = temp8 						// swap Memory and A
+
+// ********************************************************************************************
+//							Section 4.4 Arithmetic Instructions
+// ********************************************************************************************
+
+25 		"amaac"		s = ((a + $MEM) >= 0x10) ? 1 : 0;a = (a + $MEM) & 0x0F 	// add Memory to A, Carry to S
+27 		"saman"		s = (a <= $MEM) ? 1 : 0;a = ($MEM-a) & 0x0F 			// Subtract A from Memory to A, S if A <= M
+28 		"imac"		s = ($MEM == 15) ? 1 : 0;a = ($MEM + 1) & 0x0F 			// load mem, increment, carry to S
+2A 		"dman"		s = ($MEM == 0) ? 0 : 1;a = ($MEM - 1) & 0x0F 			// load mem, decrement, not borrow to S
+0E 		"ia"		a = (a + 1) & 0x0F 										// increment A no Carry out
+2B 		"iyc"		s = (y == 15) ? 1 : 0;y = (y + 1) & 0x0F 				// increment Y, carry to S
+07 		"dan"		s = (a == 0) ? 0 : 1;a = (a - 1) & 0x0F					// decrement A, not borrow to S
+2C 		"dyn"		s = (y == 0) ? 0 : 1;y = (y - 1) & 0x0F					// decrement Y, not borrow to S
+01 		"a8aac"		s = ((a + 8) >= 0x10) ? 1 : 0;a = (a + 8) & 0x0F		// add 8 to A with carry out
+05 		"a10aac"	s = ((a + 10) >= 0x10) ? 1 : 0;a = (a + 10) & 0x0F		// add 10 to A with carry out
+06 		"a6aac"		s = ((a + 6) >= 0x10) ? 1 : 0;a = (a + 6) & 0x0F		// add 6 to A with carry out
+2D 		"cpaiz" 	s = (a == 0) ? 1 : 0;a = ((a ^ 0xF)+1) & 0x0F 			// Complement A and Increment (2's complement)
+
+// ********************************************************************************************
+// 								Section 4.5 Arithmetic Compare
+// ********************************************************************************************
+
+29 		"alem" 		s = (a <= $MEM) ? 1 : 0 								// S set if A <= Memory
+70-7F 	"alec $4"	s = (a <= $4) ? 1 : 0 									// S set if A <= Constant
+
+// ********************************************************************************************
+// 								  Section 4.6 Logical Compare
+// ********************************************************************************************
+
+26 		"mnez"		s = ($MEM != 0) ? 1 : 0 								// S set if Memory non zero
+02 		"ynea"		s = (y != a) ? 1 : 0; sl = s 							// S set if Y != A. Copied to SL
+50-5F 	"ynec $4"	s = (y != $4) ? 1 : 0 									// S set if Y != Constant
+
+// ********************************************************************************************
+//								Section 4.7 Bit Manipulation
+// ********************************************************************************************
+
+30-33 	"sbit $2"	$MEM = $MEM | (1 << $2) 								// Set bit
+34-37 	"rbit $2"	$MEM = $MEM & ((1 << $2) ^ 0xF)							// Clear bit
+38-3B 	"tbit1 $2"	s = (($MEM & (1 << $2)) != 0) ? 1 : 0					// S set if bit is 1
+
+// ********************************************************************************************
+//								Section 4.8 Constant Transfer
+// ********************************************************************************************
+
+40-4F 	"tcy $4"	y = $4 													// transfer constant to Y
+60-6F 	"tcmiy $4"	$MEM = $4;y = (y + 1) & 0x0F							// transfer constant to Memory, increment Y
+
+// ********************************************************************************************
+//								Section 4.9 Input Instructions
+// ********************************************************************************************
+
+09 		"knez"		s = (inputLines() != 0) ? 1 : 0 						// S set if input lines not zero
+08 		"tka"		a = inputLines() 										// Copy input lines to A
+
+// ********************************************************************************************
+//								Section 4.10 Output instructions
+// ********************************************************************************************
+
+0D 		"setr"		if (y <= 10) writeR(y,1) 								// set R line
+0C 		"rstr"		if (y <= 10) writeR(y,0) 								// clear R line
+0A 		"tdo"		writeO((sl << 4) | a)									// transfer status latch/a to O output
+0B 		"clo"		writeO(0)												// clear O output
+
+// ********************************************************************************************
+//							Section 4.11 Ram-X Addressing Instructions
+// ********************************************************************************************
+
+3C-3F	"ldx $2"	x = $2 													// load X with constant
+00 		"comx"		x = x ^ 0x03 											// 1's complement X
+
+// ********************************************************************************************
+//							Section 4.12 ROM Addressing Instructions
+// ********************************************************************************************
+
+80-BF 	"br $6"		if (s) branch1000($6);  s = 1							// branch if S (branch coded externally)
+C0-FF 	"call $6"	if (s) call1000($6);  s = 1								// call if S (call coded externally)
+0F 		"retn"		return1000()											// return from subroutine (coded externally)
+10-1F 	"ldp $4"	pb = $4 												// load page buffer with constant
+

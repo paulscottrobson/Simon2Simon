@@ -1064,60 +1064,69 @@
 .L340
 	tcy   8                          ; $340: $41        // [3:8] <- 0
 	tcmiy 0                          ; $341: $60        //
-	tcy   14                         ; $343: $47        // [3:14] <- 1
+	tcy   14                         ; $343: $47        // [3:14] <- 1, we do this for 1 and 2.
 	tcmiy 1                          ; $347: $68        //
-.L34f
+.ScanKeyboardLoop
 	tcy   14                         ; $34f: $47        // Load 3:14 into Y, current scanning line.
 	tmy                              ; $35f: $22        //
 	setr                             ; $37f: $0d        // Read the line with that value set.
 	tka                              ; $37e: $08        //
 	rstr                             ; $37d: $0c        //
 	alec  0                          ; $37b: $70        // Causes set flag if any line set.
-	br    L348                       ; $377: $88        // No Key pressed if zero.
-	tcy   0                          ; $36f: $40        // Set bit 2 of 3:0
-	sbit  1                          ; $35e: $32        //
-	tcy   6                          ; $37c: $46        // Copy bit pattern to 3:6
+	br    ScanNoKeyPressed           ; $377: $88        // No Key pressed if zero.
+
+	tcy   0                          ; $36f: $40        // Set bit 1 of 3:0 (2)
+	sbit  1                          ; $35e: $32        // 
+
+	tcy   6                          ; $37c: $46        // Copy bit pattern of keys to 3:6
 	tam                              ; $379: $03        //
+
 	tcy   15                         ; $373: $4f        // Read 3:15
 	tma                              ; $367: $21        //
 	tcy   14                         ; $34e: $47        // Same as 3:14
 	saman                            ; $35d: $27        //
-	alec  0                          ; $37a: $70        //
-	br    L342                       ; $375: $82        //
-	tma                              ; $36b: $21        //
-	tcy   15                         ; $356: $4f        // No, 3:14 to 3:15
+	alec  0                          ; $37a: $70        // If non-zero then 3:14 and 3:15 have changed.
+	br    L342                       ; $375: $82        // If zero then been through it once ?
+
+	tma                              ; $36b: $21        // Read 3:14, copy into 3:15
+	tcy   15                         ; $356: $4f        //
 	tam                              ; $36c: $03        //
 	tcy   13                         ; $358: $4b        // Zero 3:13
 	tcmiy 0                          ; $370: $60        //
-	br    L348                       ; $361: $88        //
+	br    ScanNoKeyPressed           ; $361: $88        //
+
 .L342
-	tcy   13                         ; $342: $4b        //
+	tcy   13                         ; $342: $4b        // If 3:13 is non-zero
 	mnez                             ; $345: $26        //
 	br    L371                       ; $34b: $b1        //
-	tcy   6                          ; $357: $46        //
+	tcy   6                          ; $357: $46        // Copy 6 to 7
 	tma                              ; $36e: $21        //
 	tcy   7                          ; $35c: $4e        //
 	tam                              ; $378: $03        //
+
 .L371
 	xbr   L380                       ; $371: $17 $80    //
+
 .L346
 	tcy   13                         ; $346: $4b        //
 	imac                             ; $34d: $28        //
-	br    L348                       ; $35b: $88        //
+	br    ScanNoKeyPressed                       ; $35b: $88        //
 	tam                              ; $376: $03        //
 	imac                             ; $36d: $28        //
 	br    L369                       ; $35a: $a9        //
-	br    L348                       ; $374: $88        //
+	br    ScanNoKeyPressed                       ; $374: $88        //
 .L369
 	tcy   8                          ; $369: $41        //
 	tcmiy 1                          ; $352: $68        //
 	br    L353                       ; $364: $93        //
-.L348
-	tcy   14                         ; $348: $47        // Read 3:14
+
+.ScanNoKeyPressed
+	tcy   14                         ; $348: $47        // No key pressed. Read 3:14
 	imac                             ; $351: $28        // Increment it and load.
 	tam                              ; $362: $03        // Write it back.
 	alec  2                          ; $344: $74        // if < 2 then loop back.
-	br    L34f                       ; $349: $8f        //
+	br    ScanKeyboardLoop           ; $349: $8f        //
+
 .L353
 	tcy   0                          ; $353: $40        //
 	tbit1 1                          ; $366: $3a        //
@@ -1165,7 +1174,7 @@
 	tbit1 3                          ; $3ab: $3b        //
 	br    L3b0                       ; $396: $b0        //
 .L3ac
-	xbr   L348                       ; $3ac: $1b $88    //
+	xbr   ScanNoKeyPressed                       ; $3ac: $1b $88    //
 .L3b0
 	xbr   L346                       ; $3b0: $1b $86    //
 

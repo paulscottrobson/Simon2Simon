@@ -1,0 +1,1261 @@
+
+case 0x00: /* 00 comx */
+    x = x ^ 0x03;
+    s = 1;
+    break;
+
+case 0x01: /* 01 a8aac */
+    s = ((a + 8) >= 0x10) ? 1 : 0;
+    a = (a + 8) & 0x0F;
+    break;
+
+case 0x02: /* 02 ynea */
+    s = (y != a) ? 1 : 0;
+    sl = s;
+    break;
+
+case 0x03: /* 03 tam */
+    ram[x*16+y] = a;
+    s = 1;
+    break;
+
+case 0x04: /* 04 tamza */
+    ram[x*16+y] = a;
+    a = 0;
+    s = 1;
+    break;
+
+case 0x05: /* 05 a10aac */
+    s = ((a + 10) >= 0x10) ? 1 : 0;
+    a = (a + 10) & 0x0F;
+    break;
+
+case 0x06: /* 06 a6aac */
+    s = ((a + 6) >= 0x10) ? 1 : 0;
+    a = (a + 6) & 0x0F;
+    break;
+
+case 0x07: /* 07 dan */
+    s = (a == 0) ? 0 : 1;
+    a = (a - 1) & 0x0F;
+    break;
+
+case 0x08: /* 08 tka */
+    a = inputLines();
+    s = 1;
+    break;
+
+case 0x09: /* 09 knez */
+    s = (inputLines() != 0) ? 1 : 0;
+    break;
+
+case 0x0a: /* 0a tdo */
+    writeO((sl << 4) | a);
+    s = 1;
+    break;
+
+case 0x0b: /* 0b clo */
+    writeO(0);
+    s = 1;
+    break;
+
+case 0x0c: /* 0c rstr */
+    if (y <= 10) writeR(y,0);
+    s = 1;
+    break;
+
+case 0x0d: /* 0d setr */
+    if (y <= 10) writeR(y,1);
+    s = 1;
+    break;
+
+case 0x0e: /* 0e ia */
+    a = (a + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x0f: /* 0f retn */
+    return1000();
+    s = 1;
+    break;
+
+case 0x10: /* 10 ldp 0 */
+    pb = 0;
+    s = 1;
+    break;
+
+case 0x11: /* 11 ldp 8 */
+    pb = 8;
+    s = 1;
+    break;
+
+case 0x12: /* 12 ldp 4 */
+    pb = 4;
+    s = 1;
+    break;
+
+case 0x13: /* 13 ldp 12 */
+    pb = 12;
+    s = 1;
+    break;
+
+case 0x14: /* 14 ldp 2 */
+    pb = 2;
+    s = 1;
+    break;
+
+case 0x15: /* 15 ldp 10 */
+    pb = 10;
+    s = 1;
+    break;
+
+case 0x16: /* 16 ldp 6 */
+    pb = 6;
+    s = 1;
+    break;
+
+case 0x17: /* 17 ldp 14 */
+    pb = 14;
+    s = 1;
+    break;
+
+case 0x18: /* 18 ldp 1 */
+    pb = 1;
+    s = 1;
+    break;
+
+case 0x19: /* 19 ldp 9 */
+    pb = 9;
+    s = 1;
+    break;
+
+case 0x1a: /* 1a ldp 5 */
+    pb = 5;
+    s = 1;
+    break;
+
+case 0x1b: /* 1b ldp 13 */
+    pb = 13;
+    s = 1;
+    break;
+
+case 0x1c: /* 1c ldp 3 */
+    pb = 3;
+    s = 1;
+    break;
+
+case 0x1d: /* 1d ldp 11 */
+    pb = 11;
+    s = 1;
+    break;
+
+case 0x1e: /* 1e ldp 7 */
+    pb = 7;
+    s = 1;
+    break;
+
+case 0x1f: /* 1f ldp 15 */
+    pb = 15;
+    s = 1;
+    break;
+
+case 0x20: /* 20 tamiy */
+    ram[x*16+y] = a;
+    a = (a + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x21: /* 21 tma */
+    a = ram[x*16+y];
+    s = 1;
+    break;
+
+case 0x22: /* 22 tmy */
+    y = ram[x*16+y];
+    s = 1;
+    break;
+
+case 0x23: /* 23 tya */
+    a = y;
+    s = 1;
+    break;
+
+case 0x24: /* 24 tay */
+    y = a;
+    s = 1;
+    break;
+
+case 0x25: /* 25 amaac */
+    s = ((a + ram[x*16+y]) >= 0x10) ? 1 : 0;
+    a = (a + ram[x*16+y]) & 0x0F;
+    break;
+
+case 0x26: /* 26 mnez */
+    s = (ram[x*16+y] != 0) ? 1 : 0;
+    break;
+
+case 0x27: /* 27 saman */
+    s = (a <= ram[x*16+y]) ? 1 : 0;
+    a = (ram[x*16+y]-a) & 0x0F;
+    break;
+
+case 0x28: /* 28 imac */
+    s = (ram[x*16+y] == 15) ? 1 : 0;
+    a = (ram[x*16+y] + 1) & 0x0F;
+    break;
+
+case 0x29: /* 29 alem */
+    s = (a <= ram[x*16+y]) ? 1 : 0;
+    break;
+
+case 0x2a: /* 2a dman */
+    s = (ram[x*16+y] == 0) ? 0 : 1;
+    a = (ram[x*16+y] - 1) & 0x0F;
+    break;
+
+case 0x2b: /* 2b iyc */
+    s = (y == 15) ? 1 : 0;
+    y = (y + 1) & 0x0F;
+    break;
+
+case 0x2c: /* 2c dyn */
+    s = (y == 0) ? 0 : 1;
+    y = (y - 1) & 0x0F;
+    break;
+
+case 0x2d: /* 2d cpaiz */
+    s = (a == 0) ? 1 : 0;
+    a = ((a ^ 0xF)+1) & 0x0F;
+    break;
+
+case 0x2e: /* 2e xma */
+    temp8 = a;
+    a = ram[x*16+y];
+    ram[x*16+y] = temp8;
+    s = 1;
+    break;
+
+case 0x2f: /* 2f cla */
+    a = 0;
+    s = 1;
+    break;
+
+case 0x30: /* 30 sbit 0 */
+    ram[x*16+y] = ram[x*16+y] | (1 << 0);
+    s = 1;
+    break;
+
+case 0x31: /* 31 sbit 2 */
+    ram[x*16+y] = ram[x*16+y] | (1 << 2);
+    s = 1;
+    break;
+
+case 0x32: /* 32 sbit 1 */
+    ram[x*16+y] = ram[x*16+y] | (1 << 1);
+    s = 1;
+    break;
+
+case 0x33: /* 33 sbit 3 */
+    ram[x*16+y] = ram[x*16+y] | (1 << 3);
+    s = 1;
+    break;
+
+case 0x34: /* 34 rbit 0 */
+    ram[x*16+y] = ram[x*16+y] & ((1 << 0) ^ 0xF);
+    s = 1;
+    break;
+
+case 0x35: /* 35 rbit 2 */
+    ram[x*16+y] = ram[x*16+y] & ((1 << 2) ^ 0xF);
+    s = 1;
+    break;
+
+case 0x36: /* 36 rbit 1 */
+    ram[x*16+y] = ram[x*16+y] & ((1 << 1) ^ 0xF);
+    s = 1;
+    break;
+
+case 0x37: /* 37 rbit 3 */
+    ram[x*16+y] = ram[x*16+y] & ((1 << 3) ^ 0xF);
+    s = 1;
+    break;
+
+case 0x38: /* 38 tbit1 0 */
+    s = ((ram[x*16+y] & (1 << 0)) != 0) ? 1 : 0;
+    break;
+
+case 0x39: /* 39 tbit1 2 */
+    s = ((ram[x*16+y] & (1 << 2)) != 0) ? 1 : 0;
+    break;
+
+case 0x3a: /* 3a tbit1 1 */
+    s = ((ram[x*16+y] & (1 << 1)) != 0) ? 1 : 0;
+    break;
+
+case 0x3b: /* 3b tbit1 3 */
+    s = ((ram[x*16+y] & (1 << 3)) != 0) ? 1 : 0;
+    break;
+
+case 0x3c: /* 3c ldx 0 */
+    x = 0;
+    s = 1;
+    break;
+
+case 0x3d: /* 3d ldx 2 */
+    x = 2;
+    s = 1;
+    break;
+
+case 0x3e: /* 3e ldx 1 */
+    x = 1;
+    s = 1;
+    break;
+
+case 0x3f: /* 3f ldx 3 */
+    x = 3;
+    s = 1;
+    break;
+
+case 0x40: /* 40 tcy 0 */
+    y = 0;
+    s = 1;
+    break;
+
+case 0x41: /* 41 tcy 8 */
+    y = 8;
+    s = 1;
+    break;
+
+case 0x42: /* 42 tcy 4 */
+    y = 4;
+    s = 1;
+    break;
+
+case 0x43: /* 43 tcy 12 */
+    y = 12;
+    s = 1;
+    break;
+
+case 0x44: /* 44 tcy 2 */
+    y = 2;
+    s = 1;
+    break;
+
+case 0x45: /* 45 tcy 10 */
+    y = 10;
+    s = 1;
+    break;
+
+case 0x46: /* 46 tcy 6 */
+    y = 6;
+    s = 1;
+    break;
+
+case 0x47: /* 47 tcy 14 */
+    y = 14;
+    s = 1;
+    break;
+
+case 0x48: /* 48 tcy 1 */
+    y = 1;
+    s = 1;
+    break;
+
+case 0x49: /* 49 tcy 9 */
+    y = 9;
+    s = 1;
+    break;
+
+case 0x4a: /* 4a tcy 5 */
+    y = 5;
+    s = 1;
+    break;
+
+case 0x4b: /* 4b tcy 13 */
+    y = 13;
+    s = 1;
+    break;
+
+case 0x4c: /* 4c tcy 3 */
+    y = 3;
+    s = 1;
+    break;
+
+case 0x4d: /* 4d tcy 11 */
+    y = 11;
+    s = 1;
+    break;
+
+case 0x4e: /* 4e tcy 7 */
+    y = 7;
+    s = 1;
+    break;
+
+case 0x4f: /* 4f tcy 15 */
+    y = 15;
+    s = 1;
+    break;
+
+case 0x50: /* 50 ynec 0 */
+    s = (y != 0) ? 1 : 0;
+    break;
+
+case 0x51: /* 51 ynec 8 */
+    s = (y != 8) ? 1 : 0;
+    break;
+
+case 0x52: /* 52 ynec 4 */
+    s = (y != 4) ? 1 : 0;
+    break;
+
+case 0x53: /* 53 ynec 12 */
+    s = (y != 12) ? 1 : 0;
+    break;
+
+case 0x54: /* 54 ynec 2 */
+    s = (y != 2) ? 1 : 0;
+    break;
+
+case 0x55: /* 55 ynec 10 */
+    s = (y != 10) ? 1 : 0;
+    break;
+
+case 0x56: /* 56 ynec 6 */
+    s = (y != 6) ? 1 : 0;
+    break;
+
+case 0x57: /* 57 ynec 14 */
+    s = (y != 14) ? 1 : 0;
+    break;
+
+case 0x58: /* 58 ynec 1 */
+    s = (y != 1) ? 1 : 0;
+    break;
+
+case 0x59: /* 59 ynec 9 */
+    s = (y != 9) ? 1 : 0;
+    break;
+
+case 0x5a: /* 5a ynec 5 */
+    s = (y != 5) ? 1 : 0;
+    break;
+
+case 0x5b: /* 5b ynec 13 */
+    s = (y != 13) ? 1 : 0;
+    break;
+
+case 0x5c: /* 5c ynec 3 */
+    s = (y != 3) ? 1 : 0;
+    break;
+
+case 0x5d: /* 5d ynec 11 */
+    s = (y != 11) ? 1 : 0;
+    break;
+
+case 0x5e: /* 5e ynec 7 */
+    s = (y != 7) ? 1 : 0;
+    break;
+
+case 0x5f: /* 5f ynec 15 */
+    s = (y != 15) ? 1 : 0;
+    break;
+
+case 0x60: /* 60 tcmiy 0 */
+    ram[x*16+y] = 0;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x61: /* 61 tcmiy 8 */
+    ram[x*16+y] = 8;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x62: /* 62 tcmiy 4 */
+    ram[x*16+y] = 4;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x63: /* 63 tcmiy 12 */
+    ram[x*16+y] = 12;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x64: /* 64 tcmiy 2 */
+    ram[x*16+y] = 2;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x65: /* 65 tcmiy 10 */
+    ram[x*16+y] = 10;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x66: /* 66 tcmiy 6 */
+    ram[x*16+y] = 6;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x67: /* 67 tcmiy 14 */
+    ram[x*16+y] = 14;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x68: /* 68 tcmiy 1 */
+    ram[x*16+y] = 1;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x69: /* 69 tcmiy 9 */
+    ram[x*16+y] = 9;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6a: /* 6a tcmiy 5 */
+    ram[x*16+y] = 5;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6b: /* 6b tcmiy 13 */
+    ram[x*16+y] = 13;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6c: /* 6c tcmiy 3 */
+    ram[x*16+y] = 3;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6d: /* 6d tcmiy 11 */
+    ram[x*16+y] = 11;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6e: /* 6e tcmiy 7 */
+    ram[x*16+y] = 7;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x6f: /* 6f tcmiy 15 */
+    ram[x*16+y] = 15;
+    y = (y + 1) & 0x0F;
+    s = 1;
+    break;
+
+case 0x70: /* 70 alec 0 */
+    s = (a <= 0) ? 1 : 0;
+    break;
+
+case 0x71: /* 71 alec 8 */
+    s = (a <= 8) ? 1 : 0;
+    break;
+
+case 0x72: /* 72 alec 4 */
+    s = (a <= 4) ? 1 : 0;
+    break;
+
+case 0x73: /* 73 alec 12 */
+    s = (a <= 12) ? 1 : 0;
+    break;
+
+case 0x74: /* 74 alec 2 */
+    s = (a <= 2) ? 1 : 0;
+    break;
+
+case 0x75: /* 75 alec 10 */
+    s = (a <= 10) ? 1 : 0;
+    break;
+
+case 0x76: /* 76 alec 6 */
+    s = (a <= 6) ? 1 : 0;
+    break;
+
+case 0x77: /* 77 alec 14 */
+    s = (a <= 14) ? 1 : 0;
+    break;
+
+case 0x78: /* 78 alec 1 */
+    s = (a <= 1) ? 1 : 0;
+    break;
+
+case 0x79: /* 79 alec 9 */
+    s = (a <= 9) ? 1 : 0;
+    break;
+
+case 0x7a: /* 7a alec 5 */
+    s = (a <= 5) ? 1 : 0;
+    break;
+
+case 0x7b: /* 7b alec 13 */
+    s = (a <= 13) ? 1 : 0;
+    break;
+
+case 0x7c: /* 7c alec 3 */
+    s = (a <= 3) ? 1 : 0;
+    break;
+
+case 0x7d: /* 7d alec 11 */
+    s = (a <= 11) ? 1 : 0;
+    break;
+
+case 0x7e: /* 7e alec 7 */
+    s = (a <= 7) ? 1 : 0;
+    break;
+
+case 0x7f: /* 7f alec 15 */
+    s = (a <= 15) ? 1 : 0;
+    break;
+
+case 0x80: /* 80 br $00 */
+    if (s) branch1000(0x00);
+    s = 1;
+    break;
+
+case 0x81: /* 81 br $01 */
+    if (s) branch1000(0x01);
+    s = 1;
+    break;
+
+case 0x82: /* 82 br $02 */
+    if (s) branch1000(0x02);
+    s = 1;
+    break;
+
+case 0x83: /* 83 br $03 */
+    if (s) branch1000(0x03);
+    s = 1;
+    break;
+
+case 0x84: /* 84 br $04 */
+    if (s) branch1000(0x04);
+    s = 1;
+    break;
+
+case 0x85: /* 85 br $05 */
+    if (s) branch1000(0x05);
+    s = 1;
+    break;
+
+case 0x86: /* 86 br $06 */
+    if (s) branch1000(0x06);
+    s = 1;
+    break;
+
+case 0x87: /* 87 br $07 */
+    if (s) branch1000(0x07);
+    s = 1;
+    break;
+
+case 0x88: /* 88 br $08 */
+    if (s) branch1000(0x08);
+    s = 1;
+    break;
+
+case 0x89: /* 89 br $09 */
+    if (s) branch1000(0x09);
+    s = 1;
+    break;
+
+case 0x8a: /* 8a br $0a */
+    if (s) branch1000(0x0a);
+    s = 1;
+    break;
+
+case 0x8b: /* 8b br $0b */
+    if (s) branch1000(0x0b);
+    s = 1;
+    break;
+
+case 0x8c: /* 8c br $0c */
+    if (s) branch1000(0x0c);
+    s = 1;
+    break;
+
+case 0x8d: /* 8d br $0d */
+    if (s) branch1000(0x0d);
+    s = 1;
+    break;
+
+case 0x8e: /* 8e br $0e */
+    if (s) branch1000(0x0e);
+    s = 1;
+    break;
+
+case 0x8f: /* 8f br $0f */
+    if (s) branch1000(0x0f);
+    s = 1;
+    break;
+
+case 0x90: /* 90 br $10 */
+    if (s) branch1000(0x10);
+    s = 1;
+    break;
+
+case 0x91: /* 91 br $11 */
+    if (s) branch1000(0x11);
+    s = 1;
+    break;
+
+case 0x92: /* 92 br $12 */
+    if (s) branch1000(0x12);
+    s = 1;
+    break;
+
+case 0x93: /* 93 br $13 */
+    if (s) branch1000(0x13);
+    s = 1;
+    break;
+
+case 0x94: /* 94 br $14 */
+    if (s) branch1000(0x14);
+    s = 1;
+    break;
+
+case 0x95: /* 95 br $15 */
+    if (s) branch1000(0x15);
+    s = 1;
+    break;
+
+case 0x96: /* 96 br $16 */
+    if (s) branch1000(0x16);
+    s = 1;
+    break;
+
+case 0x97: /* 97 br $17 */
+    if (s) branch1000(0x17);
+    s = 1;
+    break;
+
+case 0x98: /* 98 br $18 */
+    if (s) branch1000(0x18);
+    s = 1;
+    break;
+
+case 0x99: /* 99 br $19 */
+    if (s) branch1000(0x19);
+    s = 1;
+    break;
+
+case 0x9a: /* 9a br $1a */
+    if (s) branch1000(0x1a);
+    s = 1;
+    break;
+
+case 0x9b: /* 9b br $1b */
+    if (s) branch1000(0x1b);
+    s = 1;
+    break;
+
+case 0x9c: /* 9c br $1c */
+    if (s) branch1000(0x1c);
+    s = 1;
+    break;
+
+case 0x9d: /* 9d br $1d */
+    if (s) branch1000(0x1d);
+    s = 1;
+    break;
+
+case 0x9e: /* 9e br $1e */
+    if (s) branch1000(0x1e);
+    s = 1;
+    break;
+
+case 0x9f: /* 9f br $1f */
+    if (s) branch1000(0x1f);
+    s = 1;
+    break;
+
+case 0xa0: /* a0 br $20 */
+    if (s) branch1000(0x20);
+    s = 1;
+    break;
+
+case 0xa1: /* a1 br $21 */
+    if (s) branch1000(0x21);
+    s = 1;
+    break;
+
+case 0xa2: /* a2 br $22 */
+    if (s) branch1000(0x22);
+    s = 1;
+    break;
+
+case 0xa3: /* a3 br $23 */
+    if (s) branch1000(0x23);
+    s = 1;
+    break;
+
+case 0xa4: /* a4 br $24 */
+    if (s) branch1000(0x24);
+    s = 1;
+    break;
+
+case 0xa5: /* a5 br $25 */
+    if (s) branch1000(0x25);
+    s = 1;
+    break;
+
+case 0xa6: /* a6 br $26 */
+    if (s) branch1000(0x26);
+    s = 1;
+    break;
+
+case 0xa7: /* a7 br $27 */
+    if (s) branch1000(0x27);
+    s = 1;
+    break;
+
+case 0xa8: /* a8 br $28 */
+    if (s) branch1000(0x28);
+    s = 1;
+    break;
+
+case 0xa9: /* a9 br $29 */
+    if (s) branch1000(0x29);
+    s = 1;
+    break;
+
+case 0xaa: /* aa br $2a */
+    if (s) branch1000(0x2a);
+    s = 1;
+    break;
+
+case 0xab: /* ab br $2b */
+    if (s) branch1000(0x2b);
+    s = 1;
+    break;
+
+case 0xac: /* ac br $2c */
+    if (s) branch1000(0x2c);
+    s = 1;
+    break;
+
+case 0xad: /* ad br $2d */
+    if (s) branch1000(0x2d);
+    s = 1;
+    break;
+
+case 0xae: /* ae br $2e */
+    if (s) branch1000(0x2e);
+    s = 1;
+    break;
+
+case 0xaf: /* af br $2f */
+    if (s) branch1000(0x2f);
+    s = 1;
+    break;
+
+case 0xb0: /* b0 br $30 */
+    if (s) branch1000(0x30);
+    s = 1;
+    break;
+
+case 0xb1: /* b1 br $31 */
+    if (s) branch1000(0x31);
+    s = 1;
+    break;
+
+case 0xb2: /* b2 br $32 */
+    if (s) branch1000(0x32);
+    s = 1;
+    break;
+
+case 0xb3: /* b3 br $33 */
+    if (s) branch1000(0x33);
+    s = 1;
+    break;
+
+case 0xb4: /* b4 br $34 */
+    if (s) branch1000(0x34);
+    s = 1;
+    break;
+
+case 0xb5: /* b5 br $35 */
+    if (s) branch1000(0x35);
+    s = 1;
+    break;
+
+case 0xb6: /* b6 br $36 */
+    if (s) branch1000(0x36);
+    s = 1;
+    break;
+
+case 0xb7: /* b7 br $37 */
+    if (s) branch1000(0x37);
+    s = 1;
+    break;
+
+case 0xb8: /* b8 br $38 */
+    if (s) branch1000(0x38);
+    s = 1;
+    break;
+
+case 0xb9: /* b9 br $39 */
+    if (s) branch1000(0x39);
+    s = 1;
+    break;
+
+case 0xba: /* ba br $3a */
+    if (s) branch1000(0x3a);
+    s = 1;
+    break;
+
+case 0xbb: /* bb br $3b */
+    if (s) branch1000(0x3b);
+    s = 1;
+    break;
+
+case 0xbc: /* bc br $3c */
+    if (s) branch1000(0x3c);
+    s = 1;
+    break;
+
+case 0xbd: /* bd br $3d */
+    if (s) branch1000(0x3d);
+    s = 1;
+    break;
+
+case 0xbe: /* be br $3e */
+    if (s) branch1000(0x3e);
+    s = 1;
+    break;
+
+case 0xbf: /* bf br $3f */
+    if (s) branch1000(0x3f);
+    s = 1;
+    break;
+
+case 0xc0: /* c0 call $00 */
+    if (s) call1000(0x00);
+    s = 1;
+    break;
+
+case 0xc1: /* c1 call $01 */
+    if (s) call1000(0x01);
+    s = 1;
+    break;
+
+case 0xc2: /* c2 call $02 */
+    if (s) call1000(0x02);
+    s = 1;
+    break;
+
+case 0xc3: /* c3 call $03 */
+    if (s) call1000(0x03);
+    s = 1;
+    break;
+
+case 0xc4: /* c4 call $04 */
+    if (s) call1000(0x04);
+    s = 1;
+    break;
+
+case 0xc5: /* c5 call $05 */
+    if (s) call1000(0x05);
+    s = 1;
+    break;
+
+case 0xc6: /* c6 call $06 */
+    if (s) call1000(0x06);
+    s = 1;
+    break;
+
+case 0xc7: /* c7 call $07 */
+    if (s) call1000(0x07);
+    s = 1;
+    break;
+
+case 0xc8: /* c8 call $08 */
+    if (s) call1000(0x08);
+    s = 1;
+    break;
+
+case 0xc9: /* c9 call $09 */
+    if (s) call1000(0x09);
+    s = 1;
+    break;
+
+case 0xca: /* ca call $0a */
+    if (s) call1000(0x0a);
+    s = 1;
+    break;
+
+case 0xcb: /* cb call $0b */
+    if (s) call1000(0x0b);
+    s = 1;
+    break;
+
+case 0xcc: /* cc call $0c */
+    if (s) call1000(0x0c);
+    s = 1;
+    break;
+
+case 0xcd: /* cd call $0d */
+    if (s) call1000(0x0d);
+    s = 1;
+    break;
+
+case 0xce: /* ce call $0e */
+    if (s) call1000(0x0e);
+    s = 1;
+    break;
+
+case 0xcf: /* cf call $0f */
+    if (s) call1000(0x0f);
+    s = 1;
+    break;
+
+case 0xd0: /* d0 call $10 */
+    if (s) call1000(0x10);
+    s = 1;
+    break;
+
+case 0xd1: /* d1 call $11 */
+    if (s) call1000(0x11);
+    s = 1;
+    break;
+
+case 0xd2: /* d2 call $12 */
+    if (s) call1000(0x12);
+    s = 1;
+    break;
+
+case 0xd3: /* d3 call $13 */
+    if (s) call1000(0x13);
+    s = 1;
+    break;
+
+case 0xd4: /* d4 call $14 */
+    if (s) call1000(0x14);
+    s = 1;
+    break;
+
+case 0xd5: /* d5 call $15 */
+    if (s) call1000(0x15);
+    s = 1;
+    break;
+
+case 0xd6: /* d6 call $16 */
+    if (s) call1000(0x16);
+    s = 1;
+    break;
+
+case 0xd7: /* d7 call $17 */
+    if (s) call1000(0x17);
+    s = 1;
+    break;
+
+case 0xd8: /* d8 call $18 */
+    if (s) call1000(0x18);
+    s = 1;
+    break;
+
+case 0xd9: /* d9 call $19 */
+    if (s) call1000(0x19);
+    s = 1;
+    break;
+
+case 0xda: /* da call $1a */
+    if (s) call1000(0x1a);
+    s = 1;
+    break;
+
+case 0xdb: /* db call $1b */
+    if (s) call1000(0x1b);
+    s = 1;
+    break;
+
+case 0xdc: /* dc call $1c */
+    if (s) call1000(0x1c);
+    s = 1;
+    break;
+
+case 0xdd: /* dd call $1d */
+    if (s) call1000(0x1d);
+    s = 1;
+    break;
+
+case 0xde: /* de call $1e */
+    if (s) call1000(0x1e);
+    s = 1;
+    break;
+
+case 0xdf: /* df call $1f */
+    if (s) call1000(0x1f);
+    s = 1;
+    break;
+
+case 0xe0: /* e0 call $20 */
+    if (s) call1000(0x20);
+    s = 1;
+    break;
+
+case 0xe1: /* e1 call $21 */
+    if (s) call1000(0x21);
+    s = 1;
+    break;
+
+case 0xe2: /* e2 call $22 */
+    if (s) call1000(0x22);
+    s = 1;
+    break;
+
+case 0xe3: /* e3 call $23 */
+    if (s) call1000(0x23);
+    s = 1;
+    break;
+
+case 0xe4: /* e4 call $24 */
+    if (s) call1000(0x24);
+    s = 1;
+    break;
+
+case 0xe5: /* e5 call $25 */
+    if (s) call1000(0x25);
+    s = 1;
+    break;
+
+case 0xe6: /* e6 call $26 */
+    if (s) call1000(0x26);
+    s = 1;
+    break;
+
+case 0xe7: /* e7 call $27 */
+    if (s) call1000(0x27);
+    s = 1;
+    break;
+
+case 0xe8: /* e8 call $28 */
+    if (s) call1000(0x28);
+    s = 1;
+    break;
+
+case 0xe9: /* e9 call $29 */
+    if (s) call1000(0x29);
+    s = 1;
+    break;
+
+case 0xea: /* ea call $2a */
+    if (s) call1000(0x2a);
+    s = 1;
+    break;
+
+case 0xeb: /* eb call $2b */
+    if (s) call1000(0x2b);
+    s = 1;
+    break;
+
+case 0xec: /* ec call $2c */
+    if (s) call1000(0x2c);
+    s = 1;
+    break;
+
+case 0xed: /* ed call $2d */
+    if (s) call1000(0x2d);
+    s = 1;
+    break;
+
+case 0xee: /* ee call $2e */
+    if (s) call1000(0x2e);
+    s = 1;
+    break;
+
+case 0xef: /* ef call $2f */
+    if (s) call1000(0x2f);
+    s = 1;
+    break;
+
+case 0xf0: /* f0 call $30 */
+    if (s) call1000(0x30);
+    s = 1;
+    break;
+
+case 0xf1: /* f1 call $31 */
+    if (s) call1000(0x31);
+    s = 1;
+    break;
+
+case 0xf2: /* f2 call $32 */
+    if (s) call1000(0x32);
+    s = 1;
+    break;
+
+case 0xf3: /* f3 call $33 */
+    if (s) call1000(0x33);
+    s = 1;
+    break;
+
+case 0xf4: /* f4 call $34 */
+    if (s) call1000(0x34);
+    s = 1;
+    break;
+
+case 0xf5: /* f5 call $35 */
+    if (s) call1000(0x35);
+    s = 1;
+    break;
+
+case 0xf6: /* f6 call $36 */
+    if (s) call1000(0x36);
+    s = 1;
+    break;
+
+case 0xf7: /* f7 call $37 */
+    if (s) call1000(0x37);
+    s = 1;
+    break;
+
+case 0xf8: /* f8 call $38 */
+    if (s) call1000(0x38);
+    s = 1;
+    break;
+
+case 0xf9: /* f9 call $39 */
+    if (s) call1000(0x39);
+    s = 1;
+    break;
+
+case 0xfa: /* fa call $3a */
+    if (s) call1000(0x3a);
+    s = 1;
+    break;
+
+case 0xfb: /* fb call $3b */
+    if (s) call1000(0x3b);
+    s = 1;
+    break;
+
+case 0xfc: /* fc call $3c */
+    if (s) call1000(0x3c);
+    s = 1;
+    break;
+
+case 0xfd: /* fd call $3d */
+    if (s) call1000(0x3d);
+    s = 1;
+    break;
+
+case 0xfe: /* fe call $3e */
+    if (s) call1000(0x3e);
+    s = 1;
+    break;
+
+case 0xff: /* ff call $3f */
+    if (s) call1000(0x3f);
+    s = 1;
+    break;

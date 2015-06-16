@@ -89,6 +89,7 @@ simon = []
 simonFile = open("simon.bin","rb")
 for i in range(0,1024):
 	simon.append(ord(simonFile.read(1)))
+	print("{0:x}".format(i))
 	assert(simon[i] == objectCode[i])
 
 print("** OK **")
