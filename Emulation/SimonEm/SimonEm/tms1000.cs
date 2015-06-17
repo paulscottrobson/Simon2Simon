@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SimonEm
 {
-    abstract class TMS1000
+    public abstract class TMS1000
     {
         private int a;                                                                                  // TMS1000 Registers
         private int x;
@@ -22,8 +22,8 @@ namespace SimonEm
         private int temp8;                                                                              // Temporary variable for xma
         private int cycles;                                                                             // Number of CPU Cycles (6 per instruction)
 
-        private int[] rom = new int[1024];                                                              // 1k ROM
-        private int[] ram = new int[64];                                                                // 64 bytes RAM
+        protected int[] rom = new int[1024];                                                            // 1k ROM
+        protected int[] ram = new int[64];                                                              // 64 bytes RAM
 
         private static int[] nextPC = { 0x01, 0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x11, 0x13, 0x15, 0x17, 0x19, 
                                         0x1B, 0x1D, 0x1F, 0x20, 0x22, 0x24, 0x26, 0x28, 0x2A, 0x2C, 0x2E, 0x30, 0x32, 
@@ -31,9 +31,50 @@ namespace SimonEm
                                         0x0E, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1A, 0x1C, 0x1E, 0x21, 0x23, 0x25, 0x27, 
                                         0x29, 0x2B, 0x2D, 0x2F, 0x31, 0x33, 0x35, 0x37, 0x39, 0x3B, 0x3D, 0x3E };
 
+        private static String[] mnemonics = { "comx", "a8aac", "ynea", "tam", "tamza", "a10aac", "a6aac", "dan", "tka", "knez", "tdo", "clo", "rstr", "setr", "ia", "retn", "ldp 0", "ldp 8", "ldp 4", "ldp 12", "ldp 2", "ldp 10", "ldp 6", "ldp 14", "ldp 1", "ldp 9", "ldp 5", "ldp 13", "ldp 3", "ldp 11", "ldp 7", "ldp 15", "tamiy", "tma", "tmy", "tya", "tay", "amaac", "mnez", "saman", "imac", "alem", "dman", "iyc", "dyn", "cpaiz", "xma", "cla", "sbit 0", "sbit 2", "sbit 1", "sbit 3", "rbit 0", "rbit 2", "rbit 1", "rbit 3", "tbit1 0", "tbit1 2", "tbit1 1", "tbit1 3", "ldx 0", "ldx 2", "ldx 1", "ldx 3", "tcy 0", "tcy 8", "tcy 4", "tcy 12", "tcy 2", "tcy 10", "tcy 6", "tcy 14", "tcy 1", "tcy 9", "tcy 5", "tcy 13", "tcy 3", "tcy 11", "tcy 7", "tcy 15", "ynec 0", "ynec 8", "ynec 4", "ynec 12", "ynec 2", "ynec 10", "ynec 6", "ynec 14", "ynec 1", "ynec 9", "ynec 5", "ynec 13", "ynec 3", "ynec 11", "ynec 7", "ynec 15", "tcmiy 0", "tcmiy 8", "tcmiy 4", "tcmiy 12", "tcmiy 2", "tcmiy 10", "tcmiy 6", "tcmiy 14", "tcmiy 1", "tcmiy 9", "tcmiy 5", "tcmiy 13", "tcmiy 3", "tcmiy 11", "tcmiy 7", "tcmiy 15", "alec 0", "alec 8", "alec 4", "alec 12", "alec 2", "alec 10", "alec 6", "alec 14", "alec 1", "alec 9", "alec 5", "alec 13", "alec 3", "alec 11", "alec 7", "alec 15", "br $00", "br $01", "br $02", "br $03", "br $04", "br $05", "br $06", "br $07", "br $08", "br $09", "br $0a", "br $0b", "br $0c", "br $0d", "br $0e", "br $0f", "br $10", "br $11", "br $12", "br $13", "br $14", "br $15", "br $16", "br $17", "br $18", "br $19", "br $1a", "br $1b", "br $1c", "br $1d", "br $1e", "br $1f", "br $20", "br $21", "br $22", "br $23", "br $24", "br $25", "br $26", "br $27", "br $28", "br $29", "br $2a", "br $2b", "br $2c", "br $2d", "br $2e", "br $2f", "br $30", "br $31", "br $32", "br $33", "br $34", "br $35", "br $36", "br $37", "br $38", "br $39", "br $3a", "br $3b", "br $3c", "br $3d", "br $3e", "br $3f", "call $00", "call $01", "call $02", "call $03", "call $04", "call $05", "call $06", "call $07", "call $08", "call $09", "call $0a", "call $0b", "call $0c", "call $0d", "call $0e", "call $0f", "call $10", "call $11", "call $12", "call $13", "call $14", "call $15", "call $16", "call $17", "call $18", "call $19", "call $1a", "call $1b", "call $1c", "call $1d", "call $1e", "call $1f", "call $20", "call $21", "call $22", "call $23", "call $24", "call $25", "call $26", "call $27", "call $28", "call $29", "call $2a", "call $2b", "call $2c", "call $2d", "call $2e", "call $2f", "call $30", "call $31", "call $32", "call $33", "call $34", "call $35", "call $36", "call $37", "call $38", "call $39", "call $3a", "call $3b", "call $3c", "call $3d", "call $3e", "call $3f" };
+
         protected abstract int inputLines();                                                            // I/O Methods, abstract here.
         protected abstract void writeR(int line,int status);
         protected abstract void writeO(int value);
+
+        /// <summary>
+        /// Reset the Microcontroller
+        /// </summary>
+        public TMS1000()
+        {
+            reset();
+        }
+
+        /// <summary>
+        /// Read Ram memory
+        /// </summary>
+        /// <param name="address">Nibble address 0-63</param>
+        /// <returns>Nibble value</returns>
+        public int getRAMMemory(int address)
+        {
+            return ram[address];
+        }
+
+        /// <summary>
+        /// Get ROM image as a list of instructions ready for the disassembly listing.
+        /// </summary>
+        /// <returns>List of strings</returns>
+        public IList<String> getAssemblerCode()
+        {
+            IList<string> codeString = new List<String>(256);
+            for(int page = 0;page < 16;page ++)
+            {
+                int pc = 0;
+                if (page != 0) codeString.Add("");
+                for (int code = 0;code < 64;code++)
+                {
+                    int opcode = rom[pc + page * 64];
+                    codeString.Add(String.Format("{0,3:X3} : {1,2:X2} : {2}", pc + page * 64,opcode,mnemonics[opcode]));
+                    pc = nextPC[pc];
+                }
+            }
+            return codeString;
+        }
 
         /// <summary>
         /// Read the current processor status.
@@ -47,6 +88,8 @@ namespace SimonEm
             info["pa"] = pa; info["pb"] = pb; info["pc"] = pc;info["sr"] = sr;            
             info["cycles"] = cycles;
             info["o"] = o;
+            info["pctr"] = pa * 64 + pc;
+            info["xy"] = x * 16 + y;
             for (int i = 0;i <= 10;i++) info["r"+i.ToString()] = r[i];
             return info;
         }
@@ -56,12 +99,17 @@ namespace SimonEm
         /// </summary>
         public void reset()
         {
+            Random r = new Random();
             a = x = y = s = sl = pa = pb = pc = sr = cycles = cl = 0;                                   // Zero everything though state is actually undefined.
             pa = 0x0F;                                                                                  // Set PA & PB to 1111 
             pb = 0x0F;
             cl = 0;                                                                                     // Clear call latch.
             writeO(0);                                                                                  // Clears the O register
             for (int i = 0; i <= 10; i++) writeR(i, 0);                                                 // Clear all the R latches.
+            a = r.Next(16); x = r.Next(4); y = r.Next(16);                                              // Everything else random
+            s = r.Next(2); sl = r.Next(2);
+            sr = r.Next(64);
+            for (int i = 0; i < 64; i++) ram[i] = r.Next(16);
         }
 
         /// <summary>

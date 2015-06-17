@@ -93,3 +93,5 @@ for i in range(0,1024):
 	assert(simon[i] == objectCode[i])
 
 print("** OK **")
+
+open("simon.inc","w").write(",".join([str(s) for s in simon]))
