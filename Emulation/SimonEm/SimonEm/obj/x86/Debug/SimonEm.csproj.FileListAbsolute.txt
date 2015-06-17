@@ -1,0 +1,2 @@
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.Properties.Resources.resources
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.csproj.GenerateResource.Cache

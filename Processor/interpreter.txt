@@ -50,22 +50,28 @@ case 0x09: /* 09 knez */
     break;
 
 case 0x0a: /* 0a tdo */
-    writeO((sl << 4) | a);
+    o = (sl << 4) | a;
+    writeO(o);
     s = 1;
     break;
 
 case 0x0b: /* 0b clo */
+    o = 0;
     writeO(0);
     s = 1;
     break;
 
 case 0x0c: /* 0c rstr */
-    if (y <= 10) writeR(y,0);
+    if (y <= 10) { r[y] = 0;
+    writeR(y,0);
+    };
     s = 1;
     break;
 
 case 0x0d: /* 0d setr */
-    if (y <= 10) writeR(y,1);
+    if (y <= 10) { r[y] = 1;
+    writeR(y,1);
+    };
     s = 1;
     break;
 
@@ -621,641 +627,641 @@ case 0x7f: /* 7f alec 15 */
     break;
 
 case 0x80: /* 80 br $00 */
-    if (s) branch1000(0x00);
+    if (s != 0) branch1000(0x00);
     s = 1;
     break;
 
 case 0x81: /* 81 br $01 */
-    if (s) branch1000(0x01);
+    if (s != 0) branch1000(0x01);
     s = 1;
     break;
 
 case 0x82: /* 82 br $02 */
-    if (s) branch1000(0x02);
+    if (s != 0) branch1000(0x02);
     s = 1;
     break;
 
 case 0x83: /* 83 br $03 */
-    if (s) branch1000(0x03);
+    if (s != 0) branch1000(0x03);
     s = 1;
     break;
 
 case 0x84: /* 84 br $04 */
-    if (s) branch1000(0x04);
+    if (s != 0) branch1000(0x04);
     s = 1;
     break;
 
 case 0x85: /* 85 br $05 */
-    if (s) branch1000(0x05);
+    if (s != 0) branch1000(0x05);
     s = 1;
     break;
 
 case 0x86: /* 86 br $06 */
-    if (s) branch1000(0x06);
+    if (s != 0) branch1000(0x06);
     s = 1;
     break;
 
 case 0x87: /* 87 br $07 */
-    if (s) branch1000(0x07);
+    if (s != 0) branch1000(0x07);
     s = 1;
     break;
 
 case 0x88: /* 88 br $08 */
-    if (s) branch1000(0x08);
+    if (s != 0) branch1000(0x08);
     s = 1;
     break;
 
 case 0x89: /* 89 br $09 */
-    if (s) branch1000(0x09);
+    if (s != 0) branch1000(0x09);
     s = 1;
     break;
 
 case 0x8a: /* 8a br $0a */
-    if (s) branch1000(0x0a);
+    if (s != 0) branch1000(0x0a);
     s = 1;
     break;
 
 case 0x8b: /* 8b br $0b */
-    if (s) branch1000(0x0b);
+    if (s != 0) branch1000(0x0b);
     s = 1;
     break;
 
 case 0x8c: /* 8c br $0c */
-    if (s) branch1000(0x0c);
+    if (s != 0) branch1000(0x0c);
     s = 1;
     break;
 
 case 0x8d: /* 8d br $0d */
-    if (s) branch1000(0x0d);
+    if (s != 0) branch1000(0x0d);
     s = 1;
     break;
 
 case 0x8e: /* 8e br $0e */
-    if (s) branch1000(0x0e);
+    if (s != 0) branch1000(0x0e);
     s = 1;
     break;
 
 case 0x8f: /* 8f br $0f */
-    if (s) branch1000(0x0f);
+    if (s != 0) branch1000(0x0f);
     s = 1;
     break;
 
 case 0x90: /* 90 br $10 */
-    if (s) branch1000(0x10);
+    if (s != 0) branch1000(0x10);
     s = 1;
     break;
 
 case 0x91: /* 91 br $11 */
-    if (s) branch1000(0x11);
+    if (s != 0) branch1000(0x11);
     s = 1;
     break;
 
 case 0x92: /* 92 br $12 */
-    if (s) branch1000(0x12);
+    if (s != 0) branch1000(0x12);
     s = 1;
     break;
 
 case 0x93: /* 93 br $13 */
-    if (s) branch1000(0x13);
+    if (s != 0) branch1000(0x13);
     s = 1;
     break;
 
 case 0x94: /* 94 br $14 */
-    if (s) branch1000(0x14);
+    if (s != 0) branch1000(0x14);
     s = 1;
     break;
 
 case 0x95: /* 95 br $15 */
-    if (s) branch1000(0x15);
+    if (s != 0) branch1000(0x15);
     s = 1;
     break;
 
 case 0x96: /* 96 br $16 */
-    if (s) branch1000(0x16);
+    if (s != 0) branch1000(0x16);
     s = 1;
     break;
 
 case 0x97: /* 97 br $17 */
-    if (s) branch1000(0x17);
+    if (s != 0) branch1000(0x17);
     s = 1;
     break;
 
 case 0x98: /* 98 br $18 */
-    if (s) branch1000(0x18);
+    if (s != 0) branch1000(0x18);
     s = 1;
     break;
 
 case 0x99: /* 99 br $19 */
-    if (s) branch1000(0x19);
+    if (s != 0) branch1000(0x19);
     s = 1;
     break;
 
 case 0x9a: /* 9a br $1a */
-    if (s) branch1000(0x1a);
+    if (s != 0) branch1000(0x1a);
     s = 1;
     break;
 
 case 0x9b: /* 9b br $1b */
-    if (s) branch1000(0x1b);
+    if (s != 0) branch1000(0x1b);
     s = 1;
     break;
 
 case 0x9c: /* 9c br $1c */
-    if (s) branch1000(0x1c);
+    if (s != 0) branch1000(0x1c);
     s = 1;
     break;
 
 case 0x9d: /* 9d br $1d */
-    if (s) branch1000(0x1d);
+    if (s != 0) branch1000(0x1d);
     s = 1;
     break;
 
 case 0x9e: /* 9e br $1e */
-    if (s) branch1000(0x1e);
+    if (s != 0) branch1000(0x1e);
     s = 1;
     break;
 
 case 0x9f: /* 9f br $1f */
-    if (s) branch1000(0x1f);
+    if (s != 0) branch1000(0x1f);
     s = 1;
     break;
 
 case 0xa0: /* a0 br $20 */
-    if (s) branch1000(0x20);
+    if (s != 0) branch1000(0x20);
     s = 1;
     break;
 
 case 0xa1: /* a1 br $21 */
-    if (s) branch1000(0x21);
+    if (s != 0) branch1000(0x21);
     s = 1;
     break;
 
 case 0xa2: /* a2 br $22 */
-    if (s) branch1000(0x22);
+    if (s != 0) branch1000(0x22);
     s = 1;
     break;
 
 case 0xa3: /* a3 br $23 */
-    if (s) branch1000(0x23);
+    if (s != 0) branch1000(0x23);
     s = 1;
     break;
 
 case 0xa4: /* a4 br $24 */
-    if (s) branch1000(0x24);
+    if (s != 0) branch1000(0x24);
     s = 1;
     break;
 
 case 0xa5: /* a5 br $25 */
-    if (s) branch1000(0x25);
+    if (s != 0) branch1000(0x25);
     s = 1;
     break;
 
 case 0xa6: /* a6 br $26 */
-    if (s) branch1000(0x26);
+    if (s != 0) branch1000(0x26);
     s = 1;
     break;
 
 case 0xa7: /* a7 br $27 */
-    if (s) branch1000(0x27);
+    if (s != 0) branch1000(0x27);
     s = 1;
     break;
 
 case 0xa8: /* a8 br $28 */
-    if (s) branch1000(0x28);
+    if (s != 0) branch1000(0x28);
     s = 1;
     break;
 
 case 0xa9: /* a9 br $29 */
-    if (s) branch1000(0x29);
+    if (s != 0) branch1000(0x29);
     s = 1;
     break;
 
 case 0xaa: /* aa br $2a */
-    if (s) branch1000(0x2a);
+    if (s != 0) branch1000(0x2a);
     s = 1;
     break;
 
 case 0xab: /* ab br $2b */
-    if (s) branch1000(0x2b);
+    if (s != 0) branch1000(0x2b);
     s = 1;
     break;
 
 case 0xac: /* ac br $2c */
-    if (s) branch1000(0x2c);
+    if (s != 0) branch1000(0x2c);
     s = 1;
     break;
 
 case 0xad: /* ad br $2d */
-    if (s) branch1000(0x2d);
+    if (s != 0) branch1000(0x2d);
     s = 1;
     break;
 
 case 0xae: /* ae br $2e */
-    if (s) branch1000(0x2e);
+    if (s != 0) branch1000(0x2e);
     s = 1;
     break;
 
 case 0xaf: /* af br $2f */
-    if (s) branch1000(0x2f);
+    if (s != 0) branch1000(0x2f);
     s = 1;
     break;
 
 case 0xb0: /* b0 br $30 */
-    if (s) branch1000(0x30);
+    if (s != 0) branch1000(0x30);
     s = 1;
     break;
 
 case 0xb1: /* b1 br $31 */
-    if (s) branch1000(0x31);
+    if (s != 0) branch1000(0x31);
     s = 1;
     break;
 
 case 0xb2: /* b2 br $32 */
-    if (s) branch1000(0x32);
+    if (s != 0) branch1000(0x32);
     s = 1;
     break;
 
 case 0xb3: /* b3 br $33 */
-    if (s) branch1000(0x33);
+    if (s != 0) branch1000(0x33);
     s = 1;
     break;
 
 case 0xb4: /* b4 br $34 */
-    if (s) branch1000(0x34);
+    if (s != 0) branch1000(0x34);
     s = 1;
     break;
 
 case 0xb5: /* b5 br $35 */
-    if (s) branch1000(0x35);
+    if (s != 0) branch1000(0x35);
     s = 1;
     break;
 
 case 0xb6: /* b6 br $36 */
-    if (s) branch1000(0x36);
+    if (s != 0) branch1000(0x36);
     s = 1;
     break;
 
 case 0xb7: /* b7 br $37 */
-    if (s) branch1000(0x37);
+    if (s != 0) branch1000(0x37);
     s = 1;
     break;
 
 case 0xb8: /* b8 br $38 */
-    if (s) branch1000(0x38);
+    if (s != 0) branch1000(0x38);
     s = 1;
     break;
 
 case 0xb9: /* b9 br $39 */
-    if (s) branch1000(0x39);
+    if (s != 0) branch1000(0x39);
     s = 1;
     break;
 
 case 0xba: /* ba br $3a */
-    if (s) branch1000(0x3a);
+    if (s != 0) branch1000(0x3a);
     s = 1;
     break;
 
 case 0xbb: /* bb br $3b */
-    if (s) branch1000(0x3b);
+    if (s != 0) branch1000(0x3b);
     s = 1;
     break;
 
 case 0xbc: /* bc br $3c */
-    if (s) branch1000(0x3c);
+    if (s != 0) branch1000(0x3c);
     s = 1;
     break;
 
 case 0xbd: /* bd br $3d */
-    if (s) branch1000(0x3d);
+    if (s != 0) branch1000(0x3d);
     s = 1;
     break;
 
 case 0xbe: /* be br $3e */
-    if (s) branch1000(0x3e);
+    if (s != 0) branch1000(0x3e);
     s = 1;
     break;
 
 case 0xbf: /* bf br $3f */
-    if (s) branch1000(0x3f);
+    if (s != 0) branch1000(0x3f);
     s = 1;
     break;
 
 case 0xc0: /* c0 call $00 */
-    if (s) call1000(0x00);
+    if (s != 0) call1000(0x00);
     s = 1;
     break;
 
 case 0xc1: /* c1 call $01 */
-    if (s) call1000(0x01);
+    if (s != 0) call1000(0x01);
     s = 1;
     break;
 
 case 0xc2: /* c2 call $02 */
-    if (s) call1000(0x02);
+    if (s != 0) call1000(0x02);
     s = 1;
     break;
 
 case 0xc3: /* c3 call $03 */
-    if (s) call1000(0x03);
+    if (s != 0) call1000(0x03);
     s = 1;
     break;
 
 case 0xc4: /* c4 call $04 */
-    if (s) call1000(0x04);
+    if (s != 0) call1000(0x04);
     s = 1;
     break;
 
 case 0xc5: /* c5 call $05 */
-    if (s) call1000(0x05);
+    if (s != 0) call1000(0x05);
     s = 1;
     break;
 
 case 0xc6: /* c6 call $06 */
-    if (s) call1000(0x06);
+    if (s != 0) call1000(0x06);
     s = 1;
     break;
 
 case 0xc7: /* c7 call $07 */
-    if (s) call1000(0x07);
+    if (s != 0) call1000(0x07);
     s = 1;
     break;
 
 case 0xc8: /* c8 call $08 */
-    if (s) call1000(0x08);
+    if (s != 0) call1000(0x08);
     s = 1;
     break;
 
 case 0xc9: /* c9 call $09 */
-    if (s) call1000(0x09);
+    if (s != 0) call1000(0x09);
     s = 1;
     break;
 
 case 0xca: /* ca call $0a */
-    if (s) call1000(0x0a);
+    if (s != 0) call1000(0x0a);
     s = 1;
     break;
 
 case 0xcb: /* cb call $0b */
-    if (s) call1000(0x0b);
+    if (s != 0) call1000(0x0b);
     s = 1;
     break;
 
 case 0xcc: /* cc call $0c */
-    if (s) call1000(0x0c);
+    if (s != 0) call1000(0x0c);
     s = 1;
     break;
 
 case 0xcd: /* cd call $0d */
-    if (s) call1000(0x0d);
+    if (s != 0) call1000(0x0d);
     s = 1;
     break;
 
 case 0xce: /* ce call $0e */
-    if (s) call1000(0x0e);
+    if (s != 0) call1000(0x0e);
     s = 1;
     break;
 
 case 0xcf: /* cf call $0f */
-    if (s) call1000(0x0f);
+    if (s != 0) call1000(0x0f);
     s = 1;
     break;
 
 case 0xd0: /* d0 call $10 */
-    if (s) call1000(0x10);
+    if (s != 0) call1000(0x10);
     s = 1;
     break;
 
 case 0xd1: /* d1 call $11 */
-    if (s) call1000(0x11);
+    if (s != 0) call1000(0x11);
     s = 1;
     break;
 
 case 0xd2: /* d2 call $12 */
-    if (s) call1000(0x12);
+    if (s != 0) call1000(0x12);
     s = 1;
     break;
 
 case 0xd3: /* d3 call $13 */
-    if (s) call1000(0x13);
+    if (s != 0) call1000(0x13);
     s = 1;
     break;
 
 case 0xd4: /* d4 call $14 */
-    if (s) call1000(0x14);
+    if (s != 0) call1000(0x14);
     s = 1;
     break;
 
 case 0xd5: /* d5 call $15 */
-    if (s) call1000(0x15);
+    if (s != 0) call1000(0x15);
     s = 1;
     break;
 
 case 0xd6: /* d6 call $16 */
-    if (s) call1000(0x16);
+    if (s != 0) call1000(0x16);
     s = 1;
     break;
 
 case 0xd7: /* d7 call $17 */
-    if (s) call1000(0x17);
+    if (s != 0) call1000(0x17);
     s = 1;
     break;
 
 case 0xd8: /* d8 call $18 */
-    if (s) call1000(0x18);
+    if (s != 0) call1000(0x18);
     s = 1;
     break;
 
 case 0xd9: /* d9 call $19 */
-    if (s) call1000(0x19);
+    if (s != 0) call1000(0x19);
     s = 1;
     break;
 
 case 0xda: /* da call $1a */
-    if (s) call1000(0x1a);
+    if (s != 0) call1000(0x1a);
     s = 1;
     break;
 
 case 0xdb: /* db call $1b */
-    if (s) call1000(0x1b);
+    if (s != 0) call1000(0x1b);
     s = 1;
     break;
 
 case 0xdc: /* dc call $1c */
-    if (s) call1000(0x1c);
+    if (s != 0) call1000(0x1c);
     s = 1;
     break;
 
 case 0xdd: /* dd call $1d */
-    if (s) call1000(0x1d);
+    if (s != 0) call1000(0x1d);
     s = 1;
     break;
 
 case 0xde: /* de call $1e */
-    if (s) call1000(0x1e);
+    if (s != 0) call1000(0x1e);
     s = 1;
     break;
 
 case 0xdf: /* df call $1f */
-    if (s) call1000(0x1f);
+    if (s != 0) call1000(0x1f);
     s = 1;
     break;
 
 case 0xe0: /* e0 call $20 */
-    if (s) call1000(0x20);
+    if (s != 0) call1000(0x20);
     s = 1;
     break;
 
 case 0xe1: /* e1 call $21 */
-    if (s) call1000(0x21);
+    if (s != 0) call1000(0x21);
     s = 1;
     break;
 
 case 0xe2: /* e2 call $22 */
-    if (s) call1000(0x22);
+    if (s != 0) call1000(0x22);
     s = 1;
     break;
 
 case 0xe3: /* e3 call $23 */
-    if (s) call1000(0x23);
+    if (s != 0) call1000(0x23);
     s = 1;
     break;
 
 case 0xe4: /* e4 call $24 */
-    if (s) call1000(0x24);
+    if (s != 0) call1000(0x24);
     s = 1;
     break;
 
 case 0xe5: /* e5 call $25 */
-    if (s) call1000(0x25);
+    if (s != 0) call1000(0x25);
     s = 1;
     break;
 
 case 0xe6: /* e6 call $26 */
-    if (s) call1000(0x26);
+    if (s != 0) call1000(0x26);
     s = 1;
     break;
 
 case 0xe7: /* e7 call $27 */
-    if (s) call1000(0x27);
+    if (s != 0) call1000(0x27);
     s = 1;
     break;
 
 case 0xe8: /* e8 call $28 */
-    if (s) call1000(0x28);
+    if (s != 0) call1000(0x28);
     s = 1;
     break;
 
 case 0xe9: /* e9 call $29 */
-    if (s) call1000(0x29);
+    if (s != 0) call1000(0x29);
     s = 1;
     break;
 
 case 0xea: /* ea call $2a */
-    if (s) call1000(0x2a);
+    if (s != 0) call1000(0x2a);
     s = 1;
     break;
 
 case 0xeb: /* eb call $2b */
-    if (s) call1000(0x2b);
+    if (s != 0) call1000(0x2b);
     s = 1;
     break;
 
 case 0xec: /* ec call $2c */
-    if (s) call1000(0x2c);
+    if (s != 0) call1000(0x2c);
     s = 1;
     break;
 
 case 0xed: /* ed call $2d */
-    if (s) call1000(0x2d);
+    if (s != 0) call1000(0x2d);
     s = 1;
     break;
 
 case 0xee: /* ee call $2e */
-    if (s) call1000(0x2e);
+    if (s != 0) call1000(0x2e);
     s = 1;
     break;
 
 case 0xef: /* ef call $2f */
-    if (s) call1000(0x2f);
+    if (s != 0) call1000(0x2f);
     s = 1;
     break;
 
 case 0xf0: /* f0 call $30 */
-    if (s) call1000(0x30);
+    if (s != 0) call1000(0x30);
     s = 1;
     break;
 
 case 0xf1: /* f1 call $31 */
-    if (s) call1000(0x31);
+    if (s != 0) call1000(0x31);
     s = 1;
     break;
 
 case 0xf2: /* f2 call $32 */
-    if (s) call1000(0x32);
+    if (s != 0) call1000(0x32);
     s = 1;
     break;
 
 case 0xf3: /* f3 call $33 */
-    if (s) call1000(0x33);
+    if (s != 0) call1000(0x33);
     s = 1;
     break;
 
 case 0xf4: /* f4 call $34 */
-    if (s) call1000(0x34);
+    if (s != 0) call1000(0x34);
     s = 1;
     break;
 
 case 0xf5: /* f5 call $35 */
-    if (s) call1000(0x35);
+    if (s != 0) call1000(0x35);
     s = 1;
     break;
 
 case 0xf6: /* f6 call $36 */
-    if (s) call1000(0x36);
+    if (s != 0) call1000(0x36);
     s = 1;
     break;
 
 case 0xf7: /* f7 call $37 */
-    if (s) call1000(0x37);
+    if (s != 0) call1000(0x37);
     s = 1;
     break;
 
 case 0xf8: /* f8 call $38 */
-    if (s) call1000(0x38);
+    if (s != 0) call1000(0x38);
     s = 1;
     break;
 
 case 0xf9: /* f9 call $39 */
-    if (s) call1000(0x39);
+    if (s != 0) call1000(0x39);
     s = 1;
     break;
 
 case 0xfa: /* fa call $3a */
-    if (s) call1000(0x3a);
+    if (s != 0) call1000(0x3a);
     s = 1;
     break;
 
 case 0xfb: /* fb call $3b */
-    if (s) call1000(0x3b);
+    if (s != 0) call1000(0x3b);
     s = 1;
     break;
 
 case 0xfc: /* fc call $3c */
-    if (s) call1000(0x3c);
+    if (s != 0) call1000(0x3c);
     s = 1;
     break;
 
 case 0xfd: /* fd call $3d */
-    if (s) call1000(0x3d);
+    if (s != 0) call1000(0x3d);
     s = 1;
     break;
 
 case 0xfe: /* fe call $3e */
-    if (s) call1000(0x3e);
+    if (s != 0) call1000(0x3e);
     s = 1;
     break;
 
 case 0xff: /* ff call $3f */
-    if (s) call1000(0x3f);
+    if (s != 0) call1000(0x3f);
     s = 1;
     break;

@@ -88,10 +88,10 @@
 //								Section 4.10 Output instructions
 // ********************************************************************************************
 
-0D 		"setr"		if (y <= 10) writeR(y,1) 								// set R line
-0C 		"rstr"		if (y <= 10) writeR(y,0) 								// clear R line
-0A 		"tdo"		writeO((sl << 4) | a)									// transfer status latch/a to O output
-0B 		"clo"		writeO(0)												// clear O output
+0D 		"setr"		if (y <= 10) { r[y] = 1; writeR(y,1); } 				// set R line
+0C 		"rstr"		if (y <= 10) { r[y] = 0; writeR(y,0); } 				// set R line
+0A 		"tdo"		o = (sl << 4) | a;writeO(o)								// transfer status latch/a to O output
+0B 		"clo"		o = 0;writeO(0)											// clear O output
 
 // ********************************************************************************************
 //							Section 4.11 Ram-X Addressing Instructions
@@ -104,8 +104,8 @@
 //							Section 4.12 ROM Addressing Instructions
 // ********************************************************************************************
 
-80-BF 	"br $6"		if (s) branch1000($6);  s = 1							// branch if S (branch coded externally)
-C0-FF 	"call $6"	if (s) call1000($6);  s = 1								// call if S (call coded externally)
+80-BF 	"br $6"		if (s != 0) branch1000($6);  s = 1						// branch if S (branch coded externally)
+C0-FF 	"call $6"	if (s != 0) call1000($6);  s = 1						// call if S (call coded externally)
 0F 		"retn"		return1000()											// return from subroutine (coded externally)
-10-1F 	"ldp $4"	pb = $4 												// load page buffer with constant
+10-1F 	"ldp $4"	pb = $4													// load page buffer with constant
 

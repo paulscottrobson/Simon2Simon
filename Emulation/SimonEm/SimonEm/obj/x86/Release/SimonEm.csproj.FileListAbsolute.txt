@@ -1,0 +1,6 @@
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Release\SimonEm.Properties.Resources.resources
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Release\SimonEm.csproj.GenerateResource.Cache
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Release\SimonEm.exe
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Release\SimonEm.pdb
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Release\SimonEm.exe
+C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Release\SimonEm.pdb
