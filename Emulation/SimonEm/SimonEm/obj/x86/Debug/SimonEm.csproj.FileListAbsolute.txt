@@ -5,3 +5,13 @@ C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Debug\SimonEm.pdb
 C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.exe
 C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.pdb
 C:\Simon\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.Main.resources
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Debug\SimonEm.exe
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Debug\SimonEm.pdb
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Debug\NAudio.dll
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\bin\Debug\NAudio.xml
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.csprojResolveAssemblyReference.cache
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.Main.resources
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.Properties.Resources.resources
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.csproj.GenerateResource.Cache
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.exe
+C:\Users\Tigrou\Documents\Simon2Simon\Emulation\SimonEm\SimonEm\obj\x86\Debug\SimonEm.pdb
