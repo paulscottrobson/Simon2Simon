@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NAudio.Wave;
 
 namespace SimonEm
 {
@@ -16,13 +19,17 @@ namespace SimonEm
 
         private static String[] registers = { "3pctr", "1a", "1x", "1y", "2xy", "1s", "1pa", "1pb", "2pc", "2sr", "1sl", "1cl","2o","4cycles" };
 
+        private Stopwatch stopwatch = new Stopwatch();
         private Label[] registerLabels;
         private int[] registerWidths;
         private IList<String> disassembly;
         private int[] codeItem = new int[1024];
+        private bool[] LightStatus = new bool[4];
+        private float[] LightTimers = new float[4];
+        private WaveOut waveout;
 
         public Main()
-        {
+        {             
             InitializeComponent();
             registerLabels = new Label[registers.Length];
             registerWidths = new int[registers.Length];
@@ -55,7 +62,7 @@ namespace SimonEm
             disassembly = simon.getAssemblerCode();
             foreach (String s in disassembly)
             {
-                if (s != "")
+            	if (s != "" && !s.StartsWith("Page", StringComparison.InvariantCulture))
                 {
                     int address = Convert.ToInt32(s.Substring(0, 3), 16);
                     codeItem[address] = codeListBox.Items.Count;
@@ -63,6 +70,22 @@ namespace SimonEm
                 codeListBox.Items.Add(s);
             }
             RefreshProcessor();
+                                    
+            //setup sound
+            waveout = new WaveOut();
+		    SampleProvider sampleProvider = new SampleProvider(simon);		  	   
+		    waveout.DesiredLatency = 100;
+		    waveout.Init(sampleProvider);		   
+        }
+        
+        public void Stop()
+        {
+        	if(timer1.Enabled)
+        	{
+	        	Console.WriteLine("stop");
+	        	timer1.Enabled = false;
+	        	RefreshProcessor();
+        	}
         }
 
 
@@ -98,15 +121,217 @@ namespace SimonEm
             
         }
 
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         private void singleStepToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        	timer1.Enabled = false;
+        	runToolStripMenuItem.Enabled = true;
+        	stopToolStripMenuItem.Enabled = true;
             simon.execute();
-            RefreshProcessor();
+            RefreshProcessor();            
         }
+        
+        void RunToolStripMenuItem1Click(object sender, EventArgs e)
+		{
+        	cyclesSoFar = 0;
+        	stopwatch.Restart();
+        	waveout.Play();
+        	
+        	runToolStripMenuItem.Enabled = false;
+        	stopToolStripMenuItem.Enabled = true;
+			timer1.Enabled = true;
+		}
+        
+        void StopToolStripMenuItem1Click(object sender, EventArgs e)
+		{
+        	simon.reset();
+        	waveout.Stop();
+        	
+        	timer1.Enabled = false;
+        	stopToolStripMenuItem.Enabled = false;
+        	runToolStripMenuItem.Enabled = true;
+        	RefreshProcessor();          
+		}
+        
+        int cyclesSoFar;        
+		void Timer1Tick(object sender, EventArgs e)
+		{
+			//300000hz / 6 cycles = 50000hz
+			long ticks = (stopwatch.ElapsedMilliseconds * 50000) / 1000;
+			while(ticks > cyclesSoFar && timer1.Enabled)
+			{					
+				simon.execute();
+				cyclesSoFar++;
+				updateLights();
+			}
+		}
+		
+		void StartButtonMouseDown(object sender, MouseEventArgs e)
+		{
+			simon.Start = true;
+		}
+		
+		void StartButtonMouseUp(object sender, MouseEventArgs e)
+		{
+			simon.Start = false;
+		}
+		
+		void LastButtonMouseDown(object sender, MouseEventArgs e)
+		{
+			simon.Last = true;
+		}
+		
+		void LastButtonMouseUp(object sender, MouseEventArgs e)
+		{
+			simon.Last = false;
+		}
+		
+		void LongestButtonMouseDown(object sender, MouseEventArgs e)
+		{
+			simon.Longest = true;
+		}
+		
+		void LongestButtonMouseUp(object sender, MouseEventArgs e)
+		{
+			simon.Longest = false;
+		}			
+		
+		void GameButton1Click(object sender, EventArgs e)
+		{
+			simon.Game = 1;
+		}
+		
+		void GameButton2Click(object sender, EventArgs e)
+		{
+			simon.Game = 2;
+		}
+		
+		void GameButton3Click(object sender, EventArgs e)
+		{
+			simon.Game = 3;
+		}
+		
+		void SkillButton1Click(object sender, EventArgs e)
+		{
+			simon.Skill = 1;
+		}
+		
+		void SkillButton2Click(object sender, EventArgs e)
+		{
+			simon.Skill = 2;
+		}
+		
+		void SkillButton3Click(object sender, EventArgs e)
+		{
+			simon.Skill = 3;
+		}
+				
+		void SkillButton4Click(object sender, EventArgs e)
+		{
+			simon.Skill = 4;
+		}
+			
+		private readonly Rectangle[] clipZones =
+		{
+			new Rectangle(0, 0, 150, 150),
+			new Rectangle(150, 0, 150, 150),
+			new Rectangle(150, 150, 150, 150),
+			new Rectangle(0, 150, 150, 150)
+		};
+
+		private readonly Color[] colorsOff =
+		{
+			Color.FromArgb(255, 25, 100, 25),
+			Color.FromArgb(255, 100, 25, 25),
+			Color.FromArgb(255, 25, 50, 100),
+			Color.FromArgb(255, 100, 100, 25)
+		};
+
+		private readonly Color[] colorsOn =
+		{
+			Color.FromArgb(255, 50, 200, 100),
+			Color.FromArgb(255, 200, 50, 50),
+			Color.FromArgb(255, 50, 100, 200),
+			Color.FromArgb(255, 250, 250, 100)
+		};
+				
+		void simonPanelPaint(object sender, PaintEventArgs e)
+		{
+			Rectangle rect = new Rectangle(10, 10, 280, 280);
+			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
+			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
+			                                         new Size(rect.Size.Width / 2, rect.Size.Height / 2));
+			for (int i = 0; i < 4; i++)
+			{ 
+				if(e.ClipRectangle.IntersectsWith(clipZones[i]))
+				{ 
+					using (GraphicsPath gp = new GraphicsPath())
+					{
+						gp.AddArc(outerRectangle, (180 + i * 90) % 360, 90);
+						gp.AddArc(innerRectangle, (270 + i * 90) % 360, -90);
+						gp.CloseFigure();
+
+						e.Graphics.FillPath(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), gp);
+					}
+				}
+			}	
+			
+			//draw cross
+			e.Graphics.FillRectangle(Brushes.Black, simonPanel.Width / 2 - 5, 0, 10, simonPanel.Width);
+			e.Graphics.FillRectangle(Brushes.Black, 0, simonPanel.Height / 2 - 5, simonPanel.Height, 10);			
+		}
+						
+		private void simonPanel_MouseDown(object sender, MouseEventArgs e)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				if (clipZones[i].Contains(e.X, e.Y))
+				{
+					simon.LightStatus[i] = true;
+				}
+			}
+		}
+
+		private void simonPanel_MouseUp(object sender, MouseEventArgs e)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				simon.LightStatus[i] = false;
+			}
+		}
+		
+		private void updateLights()
+		{
+			//light need to be off for a given period
+			//before changing state
+			for (int i = 0; i < 4; i++)
+			{
+				if(simon.getRegisterStatus(i + 4) == 1)
+				{
+					//light on
+					LightTimers[i] = 1.0f;
+					if(!LightStatus[i])
+					{
+						LightStatus[i] = true;
+						simonPanel.Invalidate(clipZones[i]);
+					}
+				}
+				else
+				{
+					//light off
+					LightTimers[i] -= 0.005f;
+					
+					if(LightTimers[i] < 0.0f)
+					{
+						LightTimers[i] = 0.0f;
+						if(LightStatus[i])
+						{
+							LightStatus[i] = false;
+							simonPanel.Invalidate(clipZones[i]);
+						}
+					}
+				}								
+			}
+		}
+		
     }
 }
