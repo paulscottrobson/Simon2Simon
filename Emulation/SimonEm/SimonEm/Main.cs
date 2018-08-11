@@ -75,7 +75,9 @@ namespace SimonEm
 			waveout = new WaveOut();
 			SampleProvider sampleProvider = new SampleProvider(simon);			   
 			waveout.DesiredLatency = 100;
-			waveout.Init(sampleProvider);		   
+			waveout.Init(sampleProvider);		
+
+			clipZones = GetClipZones();
 		}
 		
 		public void Stop()
@@ -229,15 +231,23 @@ namespace SimonEm
 		{
 			simon.Skill = 4;
 		}
-			
-		private readonly Rectangle[] clipZones =
+		
+		private Rectangle[] clipZones;
+		
+		private Rectangle[] GetClipZones()
 		{
-			new Rectangle(0, 0, 150, 150),
-			new Rectangle(150, 0, 150, 150),
-			new Rectangle(150, 150, 150, 150),
-			new Rectangle(0, 150, 150, 150)
-		};
-
+			int halfWidth = simonPanel.Width / 2;
+			int halfHeight = simonPanel.Height / 2;
+			
+			return new []
+			{
+				new Rectangle(0, 0, halfWidth, halfHeight),
+				new Rectangle(halfWidth, 0, halfWidth, halfHeight),
+				new Rectangle(halfWidth, halfHeight, halfWidth, halfHeight),
+				new Rectangle(0, halfHeight, halfWidth, halfHeight)
+			};
+		}
+				
 		private readonly Color[] colorsOff =
 		{
 			Color.FromArgb(255, 25, 100, 25),
@@ -256,28 +266,30 @@ namespace SimonEm
 				
 		void simonPanelPaint(object sender, PaintEventArgs e)
 		{
-			Rectangle rect = new Rectangle(10, 10, 280, 280);
+			Rectangle rect = new Rectangle(10, 10, simonPanel.Width - 20, simonPanel.Height - 20);
 			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
 			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
 													 new Size(rect.Size.Width / 2, rect.Size.Height / 2));
+			
+			Region r = new Region();
+			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - 5, rect.Top, 10, rect.Height));
+			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - 5, rect.Width, 10));
+			e.Graphics.SetClip(r, CombineMode.Replace);
+
 			for (int i = 0; i < 4; i++)
 			{ 
 				if(e.ClipRectangle.IntersectsWith(clipZones[i]))
-				{ 
+				{ 										
 					using (GraphicsPath gp = new GraphicsPath())
 					{
 						gp.AddArc(outerRectangle, (180 + i * 90) % 360, 90);
 						gp.AddArc(innerRectangle, (270 + i * 90) % 360, -90);
 						gp.CloseFigure();
-
+						
 						e.Graphics.FillPath(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), gp);
 					}
 				}
-			}	
-			
-			//draw cross
-			e.Graphics.FillRectangle(Brushes.Black, simonPanel.Width / 2 - 5, 0, 10, simonPanel.Width);
-			e.Graphics.FillRectangle(Brushes.Black, 0, simonPanel.Height / 2 - 5, simonPanel.Height, 10);			
+			}				
 		}
 						
 		private void simonPanel_MouseDown(object sender, MouseEventArgs e)
