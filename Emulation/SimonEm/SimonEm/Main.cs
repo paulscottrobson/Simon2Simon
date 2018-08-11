@@ -78,6 +78,7 @@ namespace SimonEm
 			waveout.Init(sampleProvider);		
 
 			clipZones = GetClipZones();
+			clipRegion = GetClipRegion();
 		}
 		
 		public void Stop()
@@ -232,7 +233,9 @@ namespace SimonEm
 			simon.Skill = 4;
 		}
 		
-		private Rectangle[] clipZones;
+		private readonly Rectangle[] clipZones;
+		
+		private readonly Region clipRegion;
 		
 		private Rectangle[] GetClipZones()
 		{
@@ -246,6 +249,27 @@ namespace SimonEm
 				new Rectangle(halfWidth, halfHeight, halfWidth, halfHeight),
 				new Rectangle(0, halfHeight, halfWidth, halfHeight)
 			};
+		}
+		
+		private Region GetClipRegion()
+		{
+			Rectangle rect = new Rectangle(10, 10, simonPanel.Width - 20, simonPanel.Height - 20);
+			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
+			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
+													 new Size(rect.Size.Width / 2, rect.Size.Height / 2));
+			
+			GraphicsPath outerPath = new GraphicsPath();
+			outerPath.AddEllipse(outerRectangle);
+			
+			GraphicsPath innerPath = new GraphicsPath();
+			innerPath.AddEllipse(innerRectangle);
+			
+			Region r = new Region(outerPath);			
+			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - 5, rect.Top, 10, rect.Height));
+			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - 5, rect.Width, 10));
+			r.Exclude(innerPath);
+						
+			return r;
 		}
 				
 		private readonly Color[] colorsOff =
@@ -265,31 +289,17 @@ namespace SimonEm
 		};
 				
 		void simonPanelPaint(object sender, PaintEventArgs e)
-		{
-			Rectangle rect = new Rectangle(10, 10, simonPanel.Width - 20, simonPanel.Height - 20);
-			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
-			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
-													 new Size(rect.Size.Width / 2, rect.Size.Height / 2));
+		{			
+			e.Graphics.SetClip(clipRegion, CombineMode.Replace);
 			
-			Region r = new Region();
-			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - 5, rect.Top, 10, rect.Height));
-			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - 5, rect.Width, 10));
-			e.Graphics.SetClip(r, CombineMode.Replace);
-
 			for (int i = 0; i < 4; i++)
 			{ 
 				if(e.ClipRectangle.IntersectsWith(clipZones[i]))
-				{ 										
-					using (GraphicsPath gp = new GraphicsPath())
-					{
-						gp.AddArc(outerRectangle, (180 + i * 90) % 360, 90);
-						gp.AddArc(innerRectangle, (270 + i * 90) % 360, -90);
-						gp.CloseFigure();
-						
-						e.Graphics.FillPath(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), gp);
-					}
+				{ 	
+                    									
+					e.Graphics.FillRectangle(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), clipZones[i]);
 				}
-			}				
+			}			
 		}
 						
 		private void simonPanel_MouseDown(object sender, MouseEventArgs e)
