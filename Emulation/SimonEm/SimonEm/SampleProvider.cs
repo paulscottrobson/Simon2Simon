@@ -15,7 +15,7 @@ namespace SimonEm
 				
 		public SampleProvider(SimonHardware simon)
 		{			
-			//sound sample frequency is set to half cpu frequency
+			//sound sample frequency is set to 1/4 of cpu frequency
 			waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(12500, 1);
 			this.simon = simon;
 		}	
@@ -33,7 +33,11 @@ namespace SimonEm
 				//wrote samples
 				for (int sampleCount = 0; sampleCount < count; sampleCount++)
 				{				
-					buffer[sampleCount + offset] = simon.SoundBuffer[simon.SoundHead%simon.SoundBuffer.Length] * 0.25f;
+					buffer[sampleCount + offset] =
+							(simon.SoundBuffer[simon.SoundHead%simon.SoundBuffer.Length]
+							+simon.SoundBuffer[(simon.SoundHead+1)%simon.SoundBuffer.Length]
+							+simon.SoundBuffer[(simon.SoundHead+2)%simon.SoundBuffer.Length]
+							+simon.SoundBuffer[(simon.SoundHead+3)%simon.SoundBuffer.Length]) / 16.0f;
 					simon.SoundHead	+= 4;
 				}						
 			}
