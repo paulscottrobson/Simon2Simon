@@ -1,4 +1,5 @@
-﻿namespace SimonEm
+﻿using System.Drawing;
+namespace SimonEm
 {
     partial class Main
     {
@@ -477,7 +478,7 @@
         	// 
         	// simonPanel
         	// 
-        	this.simonPanel.BackColor = System.Drawing.Color.Black;
+        	this.simonPanel.BackColor = SystemColors.Control;
         	this.simonPanel.Location = new System.Drawing.Point(12, 36);
         	this.simonPanel.Name = "simonPanel";
         	this.simonPanel.Size = new System.Drawing.Size(300, 300);

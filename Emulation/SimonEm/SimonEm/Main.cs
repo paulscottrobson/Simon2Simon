@@ -288,19 +288,30 @@ namespace SimonEm
 			Color.FromArgb(255, 0, 200, 250),
 			Color.FromArgb(255, 250, 250, 100)
 		};
+		
+		//prevents flickering
+		protected override CreateParams CreateParams {
+			get {
+				CreateParams cp = base.CreateParams;
+				cp.ExStyle |= 0x02000000; //turn on WS_EX_COMPOSITED
+				return cp;
+			}
+		}
 				
 		void simonPanelPaint(object sender, PaintEventArgs e)
-		{			
+		{
+			e.Graphics.SetClip(clipRegion, CombineMode.Xor);
+			e.Graphics.FillEllipse(Brushes.Black, 0, 0, simonPanel.Width, simonPanel.Height);
+			
 			e.Graphics.SetClip(clipRegion, CombineMode.Replace);
 			
 			for (int i = 0; i < 4; i++)
 			{ 
 				if(e.ClipRectangle.IntersectsWith(clipZones[i]))
 				{ 	
-                    									
 					e.Graphics.FillRectangle(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), clipZones[i]);
 				}
-			}			
+			}
 		}
 						
 		private void simonPanel_MouseDown(object sender, MouseEventArgs e)
