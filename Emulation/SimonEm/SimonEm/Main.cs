@@ -253,7 +253,8 @@ namespace SimonEm
 		
 		private Region GetClipRegion()
 		{
-			Rectangle rect = new Rectangle(10, 10, simonPanel.Width - 20, simonPanel.Height - 20);
+			const int border = 18;
+			Rectangle rect = new Rectangle(border, border, simonPanel.Width - border * 2, simonPanel.Height - border * 2);
 			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
 			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
 													 new Size(rect.Size.Width / 2, rect.Size.Height / 2));
@@ -265,8 +266,8 @@ namespace SimonEm
 			innerPath.AddEllipse(innerRectangle);
 			
 			Region r = new Region(outerPath);			
-			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - 5, rect.Top, 10, rect.Height));
-			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - 5, rect.Width, 10));
+			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - border / 2, rect.Top, border, rect.Height));
+			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - border / 2, rect.Width, border));
 			r.Exclude(innerPath);
 						
 			return r;
@@ -274,17 +275,17 @@ namespace SimonEm
 				
 		private readonly Color[] colorsOff =
 		{
-			Color.FromArgb(255, 25, 100, 25),
+			Color.FromArgb(255, 25, 100, 75),
 			Color.FromArgb(255, 100, 25, 25),
-			Color.FromArgb(255, 25, 50, 100),
-			Color.FromArgb(255, 100, 100, 25)
+			Color.FromArgb(255, 0, 100, 150),
+			Color.FromArgb(255, 120, 100, 50)
 		};
 
 		private readonly Color[] colorsOn =
 		{
 			Color.FromArgb(255, 50, 200, 100),
 			Color.FromArgb(255, 200, 50, 50),
-			Color.FromArgb(255, 50, 100, 200),
+			Color.FromArgb(255, 0, 200, 250),
 			Color.FromArgb(255, 250, 250, 100)
 		};
 				
