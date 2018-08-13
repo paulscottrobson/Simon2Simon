@@ -283,8 +283,8 @@ namespace SimonEm
 
 		private readonly Color[] colorsOn =
 		{
-			Color.FromArgb(255, 50, 200, 100),
-			Color.FromArgb(255, 200, 50, 50),
+			Color.FromArgb(255, 50, 250, 100),
+			Color.FromArgb(255, 250, 50, 50),
 			Color.FromArgb(255, 0, 200, 250),
 			Color.FromArgb(255, 250, 250, 100)
 		};
@@ -299,12 +299,10 @@ namespace SimonEm
 		}
 				
 		void simonPanelPaint(object sender, PaintEventArgs e)
-		{
-			e.Graphics.SetClip(clipRegion, CombineMode.Xor);
-			e.Graphics.FillEllipse(Brushes.Black, 0, 0, simonPanel.Width, simonPanel.Height);
+		{			
+			e.Graphics.FillEllipse(Brushes.Black, 0, 0, simonPanel.Width, simonPanel.Height);			
 			
-			e.Graphics.SetClip(clipRegion, CombineMode.Replace);
-			
+			e.Graphics.SetClip(clipRegion, CombineMode.Replace);	
 			for (int i = 0; i < 4; i++)
 			{ 
 				if(e.ClipRectangle.IntersectsWith(clipZones[i]))
