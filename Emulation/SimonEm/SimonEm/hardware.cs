@@ -7,6 +7,19 @@ namespace SimonEm
 {
     public class SimonHardware : TMS1000
     {
+    	public bool Start;
+    	public bool Last;
+    	public bool Longest; 
+    	public int Game = 1;
+    	public int Skill = 1;
+    	
+    	public bool[] LightStatus = new bool[4];
+    	
+    	public byte[] SoundBuffer = new byte[100000];
+    	
+    	public int SoundHead;
+    	public int SoundTail;
+    	    	
         /// <summary>
         /// Constructor uploads simon ROM image
         /// </summary>
@@ -14,20 +27,60 @@ namespace SimonEm
         {
             for (int i = 0; i < 1024; i++) rom[i] = romImage[i];
         }
-
-        protected override int inputLines()
+      
+        protected override int inputLines(int[] r)
         {
-            return 0;
+        	int input = 0;
+        	
+        	if(r[0] == 1)
+        	{
+        		if(Game == 1) input |= 2;	       		
+        		else if(Game == 2) input |= 1;
+        		else if(Game == 3) input |= 4;   
+        	}
+        	
+        	if(r[1] == 1)
+        	{
+        		if(LightStatus[0]) input |= 1;
+        		else if(LightStatus[1]) input |= 2;
+        		else if(LightStatus[2]) input |= 4;
+        		else if(LightStatus[3]) input |= 8;        		
+        	}
+        	
+        	if(r[2] == 1) 
+        	{
+        		if(Start) input |= 1;	       		
+        		else if(Last) input |= 2;
+        		else if(Longest) input |= 4;       		
+        	}
+        	
+        	if(r[9] == 1) 
+        	{
+        		if(Skill == 1) input |= 2;
+        		else if(Skill == 2) input |= 4;
+        		else if(Skill == 3) input |= 8;
+	       		else if(Skill == 4) input |= 1;
+        	}
+  	
+        	return input;
         }
 
         protected override void writeR(int line, int status)
-        {
+        {  
         }
 
         protected override void writeO(int value)
-        {
+        {        
         }
-
+        
+        public override void execute()
+        {
+        	base.execute();
+        	//speaker
+        	SoundBuffer[SoundTail % SoundBuffer.Length] = (byte)getRegisterStatus(8);
+    		SoundTail++;
+        }
+       
         /// <summary>
         /// Numerical dump of Simon ROM image
         /// </summary>
