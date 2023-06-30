@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +12,18 @@ namespace SimonEm
 		private int y;
 		private int s;
 		private int sl;
-        private int pa;
+		private int pa;
 		private int pb;
-        private int pc;
+		private int pc;
 		private int sr;
 		private int cl;
 		private int o;
-        private int[] r = new int[11];
+		private int[] r = new int[11];
 		private int temp8;                                                                              // Temporary variable for xma
-        private int cycles;                                                                             // Number of CPU Cycles (6 per instruction)
+		private int cycles;                                                                             // Number of CPU Cycles (6 per instruction)
 
 		protected int[] rom = new int[1024];                                                            // 1k ROM
-        protected int[] ram = new int[64];                                                              // 64 bytes RAM
+		protected int[] ram = new int[64];                                                              // 64 bytes RAM
 
 		private static int[] nextPC = { 0x01, 0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x11, 0x13, 0x15, 0x17, 0x19,
 			0x1B, 0x1D, 0x1F, 0x20, 0x22, 0x24, 0x26, 0x28, 0x2A, 0x2C, 0x2E, 0x30, 0x32,
@@ -54,7 +54,7 @@ namespace SimonEm
 		{
 			return ram[address];
 		}
-		
+
 		public int getRegisterStatus(int index)
 		{
 			return r[index];
@@ -67,17 +67,17 @@ namespace SimonEm
 		public IList<String> getAssemblerCode()
 		{
 			IList<string> codeString = new List<String>(256);
-			for(int page = 0;page < 16;page ++)
+			for (int page = 0;page < 16;page ++)
 			{
 				int pc = 0;
-				if (page != 0) 
-				{					
-					codeString.Add("");								
+				if (page != 0)
+				{
+					codeString.Add("");
 				}
-				
-				codeString.Add("Page " + page);	
+
+				codeString.Add("Page " + page);
 				for (int code = 0;code < 64;code++)
-				{					
+				{
 					int opcode = rom[pc + page * 64];
 					codeString.Add(String.Format("{0,3:X3} : {1,2:X2} : {2}", pc + page * 64,opcode,mnemonics[opcode]));
 					pc = nextPC[pc];
