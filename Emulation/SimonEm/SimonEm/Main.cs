@@ -74,7 +74,7 @@ namespace SimonEm
 			waveout.Init(sampleProvider);
 
 			clipZones = GetClipZones();
-			clipRegion = GetClipRegion();
+			graphichPaths = GetGraphicPaths();
 		}
 
 		public void Stop()
@@ -231,7 +231,7 @@ namespace SimonEm
 
 		private readonly Rectangle[] clipZones;
 
-		private readonly Region clipRegion;
+		private readonly GraphicsPath[] graphichPaths;
 
 		private Rectangle[] GetClipZones()
 		{
@@ -247,26 +247,32 @@ namespace SimonEm
 			};
 		}
 
-		private Region GetClipRegion()
+		private GraphicsPath[] GetGraphicPaths()
 		{
-			const int border = 18;
-			Rectangle rect = new Rectangle(border, border, simonPanel.Width - border * 2, simonPanel.Height - border * 2);
-			Rectangle outerRectangle = new Rectangle(new Point(rect.Left, rect.Top), rect.Size);
-			Rectangle innerRectangle = new Rectangle(new Point(rect.Left+rect.Size.Width / 4, rect.Top+rect.Size.Height / 4),
-													new Size(rect.Size.Width / 2, rect.Size.Height / 2));
+			const int innerBorder = 18;
+			const int outerBorder = 4;
 
-			GraphicsPath outerPath = new GraphicsPath();
-			outerPath.AddEllipse(outerRectangle);
+			Rectangle outerRectangle = new Rectangle(0, 0, simonPanel.Width, simonPanel.Height);
+			outerRectangle.Inflate(-innerBorder, -innerBorder);
+			outerRectangle.Inflate(-outerBorder, -outerBorder);
 
-			GraphicsPath innerPath = new GraphicsPath();
-			innerPath.AddEllipse(innerRectangle);
+			Rectangle innerRectangle = outerRectangle;
+			innerRectangle.Inflate(-outerRectangle.Width / 4, -outerRectangle.Height / 4);
 
-			Region r = new Region(outerPath);
-			r.Exclude(new Rectangle(rect.Left + rect.Width / 2 - border / 2, rect.Top, border, rect.Height));
-			r.Exclude(new Rectangle(rect.Left, rect.Top + rect.Height / 2 - border / 2, rect.Width, border));
-			r.Exclude(innerPath);
+			int degrees = (int)(Math.Asin(innerBorder / (double)outerRectangle.Width) / Math.PI * 180.0);
 
-			return r;
+			var result = new GraphicsPath[4];
+			for (int i = 0; i < 4; i++)
+			{
+				GraphicsPath gp = new GraphicsPath();
+				gp.AddArc(outerRectangle, (180 + degrees + i * 90) % 360, 90 - degrees * 2);
+				gp.AddArc(innerRectangle, (270 - degrees * 2 + i * 90) % 360, -90 + degrees * 4);
+				gp.CloseFigure();
+
+				result[i] = gp;
+			}
+
+			return result;
 		}
 
 		private readonly Color[] colorsOff =
@@ -285,25 +291,24 @@ namespace SimonEm
 			Color.FromArgb(255, 250, 250, 100)
 		};
 
-		//prevents flickering
-		protected override CreateParams CreateParams {
-			get {
-				CreateParams cp = base.CreateParams;
-				cp.ExStyle |= 0x02000000; //turn on WS_EX_COMPOSITED
-				return cp;
-			}
-		}
-
 		void simonPanelPaint(object sender, PaintEventArgs e)
 		{
-			e.Graphics.FillEllipse(Brushes.Black, 0, 0, simonPanel.Width, simonPanel.Height);
+			const int outerBorder = 4;
 
-			e.Graphics.SetClip(clipRegion, CombineMode.Replace);
+			Rectangle rect = new Rectangle(0, 0, simonPanel.Width, simonPanel.Height);
+			rect.Inflate(-outerBorder, -outerBorder);
+
+			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+			e.Graphics.FillEllipse(Brushes.Black, rect);
+
 			for (int i = 0; i < 4; i++)
 			{
 				if (e.ClipRectangle.IntersectsWith(clipZones[i]))
 				{
-					e.Graphics.FillRectangle(new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]), clipZones[i]);
+					using (var brush = new SolidBrush(LightStatus[i] ? colorsOn[i] : colorsOff[i]))
+					{
+						e.Graphics.FillPath(brush, graphichPaths[i]);
+					}
 				}
 			}
 		}

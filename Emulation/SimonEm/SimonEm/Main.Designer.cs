@@ -72,7 +72,7 @@ namespace SimonEm
 			this.panelGame = new System.Windows.Forms.Panel();
 			this.panelSkill = new System.Windows.Forms.Panel();
 			this.skillButton4 = new System.Windows.Forms.RadioButton();
-			this.simonPanel = new System.Windows.Forms.Panel();
+			this.simonPanel = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.ramView)).BeginInit();
 			this.menuStrip1.SuspendLayout();
 			this.panelGame.SuspendLayout();
@@ -558,7 +558,7 @@ namespace SimonEm
 		private System.Windows.Forms.Panel panelSkill;
 		private System.Windows.Forms.RadioButton skillButton4;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-		private System.Windows.Forms.Panel simonPanel;
+		private System.Windows.Forms.PictureBox simonPanel;
 	}
 }
 
