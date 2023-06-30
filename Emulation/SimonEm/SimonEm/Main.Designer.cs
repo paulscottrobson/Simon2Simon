@@ -540,7 +540,6 @@ namespace SimonEm
 		private System.Windows.Forms.DataGridViewTextBoxColumn AF;
 		private System.Windows.Forms.ListBox codeListBox;
 		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem emulatorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem singleStepToolStripMenuItem;
 		private System.Windows.Forms.Timer timer1;
 		private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
