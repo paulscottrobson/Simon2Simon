@@ -87,37 +87,46 @@ namespace SimonEm
 			}
 		}
 
-
 		private void RefreshProcessor()
 		{
-			String[] data;
 			IDictionary<string, int> status = simon.getStatus();
 			for (int i = 0; i < registers.Length; i++)
 			{
-				String text = status[registers[i].Substring(1)].ToString("X"+(registerWidths[i].ToString()));
+				var text = status[registers[i].Substring(1)].ToString("X" + (registerWidths[i].ToString()));
 				registerLabels[i].Text = text;
 			}
-			ramView.Rows.Clear();
-			for (int row = 0; row < 4; row++)
+
+			if (ramView.Rows.Count == 0)
 			{
-				data = new String[16];
-				for (int col = 0; col < 16; col++)
-					data[col] = "	 " + simon.getRAMMemory(row * 16 + col).ToString("X1") + "	  ";
+				var data = new string[16];
+				ramView.Rows.Clear();
+				for (int row = 0; row < 4; row++)
+				{
+					ramView.Rows.Add(data);
+				}
+				ramView.Rows.Add("");
 				ramView.Rows.Add(data);
 			}
-			ramView.Rows.Add("");
-			data = new String[16];
+
+			for (int row = 0; row < 4; row++)
+			{
+				for (int col = 0; col < 16; col++)
+				{
+					ramView[col, row].Value = simon.getRAMMemory(row * 16 + col).ToString("X1");
+				}
+			}
+
 			for (int col = 0; col <= 10; col++)
-				data[col] = status["r" + col.ToString()].ToString();
-			ramView.Rows.Add(data);
+			{
+				ramView[col, 5].Value = status["r" + col.ToString()].ToString();
+			}
 			ramView.CurrentCell = ramView.Rows[status["x"]].Cells[status["y"]];
 
 			int pctr = codeItem[status["pctr"]];
-			codeListBox.SelectionMode = SelectionMode.MultiExtended ;
+			codeListBox.SelectionMode = SelectionMode.MultiExtended;
 			codeListBox.ClearSelected();
 			codeListBox.SelectedIndex = pctr;
 			codeListBox.TopIndex = pctr - 4;
-
 		}
 
 		private void singleStepToolStripMenuItem_Click(object sender, EventArgs e)
