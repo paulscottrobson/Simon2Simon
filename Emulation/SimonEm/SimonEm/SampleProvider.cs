@@ -1,13 +1,7 @@
-using System;
-using System.Diagnostics;
 using NAudio.Wave;
-using SimonEm;
 
 namespace SimonEm
 {
-	/// <summary>
-	/// Description of SoundGenerator.
-	/// </summary>
 	public class SampleProvider : ISampleProvider {
 
 		WaveFormat waveFormat;

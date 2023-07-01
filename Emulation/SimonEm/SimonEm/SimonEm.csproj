@@ -43,9 +43,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hardware.cs" />
+    <Compile Include="SimonHardware.cs" />
     <Compile Include="SampleProvider.cs" />
-    <Compile Include="tms1000.cs" />
+    <Compile Include="TMS1000.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

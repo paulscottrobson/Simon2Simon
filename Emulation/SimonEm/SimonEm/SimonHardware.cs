@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace SimonEm
 {
 	public class SimonHardware : TMS1000
@@ -25,10 +20,13 @@ namespace SimonEm
 		/// </summary>
 		public SimonHardware() : base()
 		{
-			for (int i = 0; i < 1024; i++) rom[i] = romImage[i];
+			for (int i = 0; i < 1024; i++)
+			{
+				rom[i] = romImage[i];
+			}
 		}
 
-		protected override int inputLines(int[] r)
+		protected override int InputLines(int[] r)
 		{
 			int input = 0;
 
@@ -65,17 +63,17 @@ namespace SimonEm
 			return input;
 		}
 
-		protected override void writeR(int line, int status)
+		protected override void WriteR(int line, int status)
 		{
 		}
 
-		protected override void writeO(int value)
+		protected override void WriteO(int value)
 		{
 		}
 
-		public override void execute()
+		public override void Execute()
 		{
-			base.execute();
+			base.Execute();
 			//speaker
 			SoundBuffer[SoundTail % SoundBuffer.Length] = (byte)getRegisterStatus(8);
 			SoundTail++;

@@ -30,8 +30,6 @@ namespace SimonEm
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.cpuGroup = new System.Windows.Forms.GroupBox();
 			this.ramView = new System.Windows.Forms.DataGridView();
 			this.A0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,7 +50,6 @@ namespace SimonEm
 			this.AF = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.codeListBox = new System.Windows.Forms.ListBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +74,7 @@ namespace SimonEm
 			this.menuStrip1.SuspendLayout();
 			this.panelGame.SuspendLayout();
 			this.panelSkill.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.simonPanel)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// cpuGroup
@@ -98,14 +96,6 @@ namespace SimonEm
 			this.ramView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.ramView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.ramView.CausesValidation = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.ramView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.ramView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.ramView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.A0,
@@ -124,14 +114,6 @@ namespace SimonEm
             this.AD,
             this.AE,
             this.AF});
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.ramView.DefaultCellStyle = dataGridViewCellStyle2;
 			this.ramView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.ramView.Location = new System.Drawing.Point(12, 362);
 			this.ramView.MultiSelect = false;
@@ -277,19 +259,12 @@ namespace SimonEm
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
             this.gameToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(907, 24);
 			this.menuStrip1.TabIndex = 18;
 			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// fileToolStripMenuItem
-			// 
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-			this.fileToolStripMenuItem.Text = "&File";
 			// 
 			// gameToolStripMenuItem
 			// 
@@ -324,7 +299,7 @@ namespace SimonEm
 			this.singleStepToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
 			this.singleStepToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
 			this.singleStepToolStripMenuItem.Text = "&Single Step";
-			this.singleStepToolStripMenuItem.Click += new System.EventHandler(this.singleStepToolStripMenuItem_Click);
+			this.singleStepToolStripMenuItem.Click += new System.EventHandler(this.SingleStepToolStripMenuItem_Click);
 			// 
 			// timer1
 			// 
@@ -478,14 +453,15 @@ namespace SimonEm
 			// 
 			// simonPanel
 			// 
-			this.simonPanel.BackColor = SystemColors.Control;
+			this.simonPanel.BackColor = System.Drawing.SystemColors.Control;
 			this.simonPanel.Location = new System.Drawing.Point(12, 36);
 			this.simonPanel.Name = "simonPanel";
 			this.simonPanel.Size = new System.Drawing.Size(300, 300);
 			this.simonPanel.TabIndex = 33;
-			this.simonPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.simonPanelPaint);
-			this.simonPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.simonPanel_MouseDown);
-			this.simonPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.simonPanel_MouseUp);
+			this.simonPanel.TabStop = false;
+			this.simonPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SimonPanelPaint);
+			this.simonPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SimonPanel_MouseDown);
+			this.simonPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SimonPanel_MouseUp);
 			// 
 			// Main
 			// 
@@ -512,6 +488,7 @@ namespace SimonEm
 			this.menuStrip1.PerformLayout();
 			this.panelGame.ResumeLayout(false);
 			this.panelSkill.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.simonPanel)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -557,7 +534,6 @@ namespace SimonEm
 		private System.Windows.Forms.Panel panelGame;
 		private System.Windows.Forms.Panel panelSkill;
 		private System.Windows.Forms.RadioButton skillButton4;
-		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.PictureBox simonPanel;
 	}
 }

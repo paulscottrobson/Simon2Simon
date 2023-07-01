@@ -13,12 +13,12 @@ namespace SimonEm
 	{
 		private SimonHardware simon = new SimonHardware();
 
-		private static String[] registers = { "3pctr", "1a", "1x", "1y", "2xy", "1s", "1pa", "1pb", "2pc", "2sr", "1sl", "1cl","2o","4cycles" };
+		private static string[] registers = { "3pctr", "1a", "1x", "1y", "2xy", "1s", "1pa", "1pb", "2pc", "2sr", "1sl", "1cl","2o","4cycles" };
 
 		private Stopwatch stopwatch = new Stopwatch();
 		private Label[] registerLabels;
 		private int[] registerWidths;
-		private IList<String> disassembly;
+		private IList<string> disassembly;
 		private int[] codeItem = new int[1024];
 		private bool[] LightStatus = new bool[4];
 		private float[] LightTimers = new float[4];
@@ -38,15 +38,15 @@ namespace SimonEm
 				y = y + lbl.Height / 2;
 				lbl.Text = registers[i].Substring(1).ToUpper() + ":";
 				lbl.Left = x; lbl.Top = y;
-				this.Controls.Add(lbl);
+				Controls.Add(lbl);
 				lbl.BringToFront();
 				lbl.Font = lblFont;
 
-				registerWidths[i] = Int32.Parse(registers[i].Substring(0, 1));
+				registerWidths[i] = int.Parse(registers[i].Substring(0, 1));
 				registerLabels[i] = new Label();
 				registerLabels[i].Left = x + 72; registerLabels[i].Top = y;
 				registerLabels[i].Text = "XXXXXX".Substring(0, registerWidths[i]);
-				this.Controls.Add(registerLabels[i]);
+				Controls.Add(registerLabels[i]);
 				registerLabels[i].BringToFront();
 				registerLabels[i].Font = lblFont;
 				registerLabels[i].Width = 48;
@@ -56,7 +56,7 @@ namespace SimonEm
 				ramView.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
 			}
 			disassembly = simon.getAssemblerCode();
-			foreach (String s in disassembly)
+			foreach (string s in disassembly)
 			{
 				if (s != "" && !s.StartsWith("Page", StringComparison.InvariantCulture))
 				{
@@ -81,7 +81,6 @@ namespace SimonEm
 		{
 			if (timer1.Enabled)
 			{
-				Console.WriteLine("stop");
 				timer1.Enabled = false;
 				RefreshProcessor();
 			}
@@ -129,12 +128,12 @@ namespace SimonEm
 			codeListBox.TopIndex = pctr - 4;
 		}
 
-		private void singleStepToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SingleStepToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			timer1.Enabled = false;
 			runToolStripMenuItem.Enabled = true;
 			stopToolStripMenuItem.Enabled = true;
-			simon.execute();
+			simon.Execute();
 			RefreshProcessor();
 		}
 
@@ -167,9 +166,9 @@ namespace SimonEm
 			long ticks = (stopwatch.ElapsedMilliseconds * 50000) / 1000;
 			while (ticks > cyclesSoFar && timer1.Enabled)
 			{
-				simon.execute();
+				simon.Execute();
 				cyclesSoFar++;
-				updateLights();
+				UpdateLights();
 			}
 		}
 
@@ -258,17 +257,17 @@ namespace SimonEm
 
 		private GraphicsPath[] GetGraphicPaths()
 		{
-			const int innerBorder = 18;
-			const int outerBorder = 4;
+			const int padding = 4;
+			const int border = 18;
 
 			Rectangle outerRectangle = new Rectangle(0, 0, simonPanel.Width, simonPanel.Height);
-			outerRectangle.Inflate(-innerBorder, -innerBorder);
-			outerRectangle.Inflate(-outerBorder, -outerBorder);
+			outerRectangle.Inflate(-border, -border);
+			outerRectangle.Inflate(-padding, -padding);
 
 			Rectangle innerRectangle = outerRectangle;
 			innerRectangle.Inflate(-outerRectangle.Width / 4, -outerRectangle.Height / 4);
 
-			int degrees = (int)(Math.Asin(innerBorder / (double)outerRectangle.Width) / Math.PI * 180.0);
+			int degrees = (int)(Math.Asin(border / (double)outerRectangle.Width) / Math.PI * 180.0);
 
 			var result = new GraphicsPath[4];
 			for (int i = 0; i < 4; i++)
@@ -300,12 +299,12 @@ namespace SimonEm
 			Color.FromArgb(255, 250, 250, 100)
 		};
 
-		void simonPanelPaint(object sender, PaintEventArgs e)
+		void SimonPanelPaint(object sender, PaintEventArgs e)
 		{
-			const int outerBorder = 4;
+			const int padding = 4;
 
 			Rectangle rect = new Rectangle(0, 0, simonPanel.Width, simonPanel.Height);
-			rect.Inflate(-outerBorder, -outerBorder);
+			rect.Inflate(-padding, -padding);
 
 			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 			e.Graphics.FillEllipse(Brushes.Black, rect);
@@ -322,7 +321,7 @@ namespace SimonEm
 			}
 		}
 
-		private void simonPanel_MouseDown(object sender, MouseEventArgs e)
+		private void SimonPanel_MouseDown(object sender, MouseEventArgs e)
 		{
 			for (int i = 0; i < 4; i++)
 			{
@@ -333,7 +332,7 @@ namespace SimonEm
 			}
 		}
 
-		private void simonPanel_MouseUp(object sender, MouseEventArgs e)
+		private void SimonPanel_MouseUp(object sender, MouseEventArgs e)
 		{
 			for (int i = 0; i < 4; i++)
 			{
@@ -341,7 +340,7 @@ namespace SimonEm
 			}
 		}
 
-		private void updateLights()
+		private void UpdateLights()
 		{
 			//light need to be off for a given period
 			//before changing state
