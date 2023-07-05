@@ -163,7 +163,7 @@ namespace SimonEm
 		void Timer1Tick(object sender, EventArgs e)
 		{
 			//300000hz / 6 cycles = 50000hz
-			long ticks = (stopwatch.ElapsedMilliseconds * 50000) / 1000;
+			long ticks = (stopwatch.ElapsedMilliseconds * 44100) / 1000;
 			while (ticks > cyclesSoFar && timer1.Enabled)
 			{
 				simon.Execute();
